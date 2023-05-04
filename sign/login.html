@@ -23,10 +23,75 @@
           <span class="label-text"> Password</span>
           <span class="nav-dot"></span>
         </label>
+        
         <button type="submit">Create Your Account</button>
         <p class="tip">Press Tab</p>
         <div class="signup-button">Log In</div>
       </form>
+      <script type="module">
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBoOxLmlH9WR7si2Y0R01OM3c5I1wgnuPM",
+          authDomain: "illicolove-7c904.firebaseapp.com",
+          databaseURL: "https://illicolove-7c904-default-rtdb.firebaseio.com",
+          projectId: "illicolove-7c904",
+          storageBucket: "illicolove-7c904.appspot.com",
+          messagingSenderId: "1086957054874",
+          appId: "1:1086957054874:web:4f1899c85184210e482823"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+
+        import {
+            getDatabase,
+            ref,
+            set,
+            update,
+            child,
+            onValue,
+            remove,
+            get,
+        } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+
+        import { getStorage, getDownloadURL 
+        } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js"
+
+     const db = getDatabase();
+     
+      function submitmy(){
+      var email = document.getElementById('input-1').value
+      var password = document.getElementById('input-4').value
+    
+      const UserConnectuser = localStorage.getItem("storageUserName");
+        const dbref = ref(db);
+                get(child(dbref, "Thedatas/" + UserConnectuser))
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                       if(email==snapshot.val().Email && password==snapshot.val().Password){
+                        window.location.href = "./../index.html"
+                       }else{
+                        alert("Mot de passe ou Email incorrect")
+                       }
+                    } else {
+                      alert("Vous n'avez pas un compte")
+                    }
+                })
+                .catch((error) => {
+                    alert("il y a une ERROR " + error);
+                });
+      }
       
+        window.submitmy = submitmy;
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script> 
 </body>
 </html>

@@ -1,49 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="signup.css">
-</head>
-<body>
+  </head>
+  <body>
     <form action="javascript:submitmy()">
-        <h1 style="color: blue !important; text-align: center;">Sign Up for Account</h1>
-        <input id="input-1" type="text" placeholder="John Doe" required /> <!---required autofocus-->
-        <label for="input-1">
-          <span class="label-text">Full Name</span>
-          <span class="nav-dot"></span>
-          <div class="signup-button-trigger">Sign Up</div>
-        </label>
-        <input id="input-2" type="text" placeholder="john" required />
-        <label for="input-2">
-          <span class="label-text">Username</span>
-          <span class="nav-dot"></span>
-        </label>
-        <input id="input-3" type="email" placeholder="email@address.com" required />
-        <label for="input-3">
-          <span class="label-text">Email</span>
-          <span class="nav-dot"></span>
-        </label>
-        <input id="input-4" type="text" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required />
-        <label for="input-4">
-          <span class="label-text">Password</span>
-          <span class="nav-dot"></span>
-        </label>
-        <input id="input-5" type="text" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required />
-        <label for="input-5">
-          <span class="label-text">Confirm Password</span>
-          <span class="nav-dot"></span>
-        </label>
-        <button type="submit">Create Your Account</button>
-        <p class="tip">Press Tab</p>
-        <div class="signup-button">Sign Up</div>
-      </form>
-    <script>
-        function submitmy(){
-            alert('le compte est bon')
+      <h1 style="color: blue !important; text-align: center;">Sign Up for
+        Account</h1>
+      <input id="input-1" type="text" placeholder="John Doe" required />
+      <!---required autofocus-->
+      <label for="input-1">
+        <span class="label-text">Full Name</span>
+        <span class="nav-dot"></span>
+        <div class="signup-button-trigger">Sign Up</div>
+      </label>
+      <input id="input-2" type="text" placeholder="john" required />
+      <label for="input-2">
+        <span class="label-text">Username</span>
+        <span class="nav-dot"></span>
+      </label>
+      <input id="input-3" type="email" placeholder="email@address.com" required
+        />
+      <label for="input-3">
+        <span class="label-text">Email</span>
+        <span class="nav-dot"></span>
+      </label>
+      <input id="input-4" type="text"
+        placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required />
+      <label for="input-4">
+        <span class="label-text">Password</span>
+        <span class="nav-dot"></span>
+      </label>
+      <input id="input-5" type="text"
+        placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required />
+      <label for="input-5">
+        <span class="label-text">Confirm Password</span>
+        <span class="nav-dot"></span>
+      </label>
+      <button type="submit">Create Your Account</button>
+      <p class="tip">Press Tab</p>
+      <div class="signup-button">Sign Up</div>
+    </form>
+    <script type="module">
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBoOxLmlH9WR7si2Y0R01OM3c5I1wgnuPM",
+          authDomain: "illicolove-7c904.firebaseapp.com",
+          databaseURL: "https://illicolove-7c904-default-rtdb.firebaseio.com",
+          projectId: "illicolove-7c904",
+          storageBucket: "illicolove-7c904.appspot.com",
+          messagingSenderId: "1086957054874",
+          appId: "1:1086957054874:web:4f1899c85184210e482823"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+
+        import {
+            getDatabase,
+            ref,
+            set,
+            update,
+            child,
+            onValue,
+            remove,
+            get,
+        } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+
+        import { getStorage, getDownloadURL 
+        } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js"
+
+     const db = getDatabase();
+     
+      function submitmy(){
+      var fullname = document.getElementById('input-1').value
+      var username = document.getElementById('input-2').value
+      var email = document.getElementById('input-3').value
+      var password = document.getElementById('input-4').value
+      var confirmpassword = document.getElementById('input-5').value
+
+        //--------------function to generate unique ID
+        var id = () => {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
         }
-    </script>  
-</body>
+        const idproduct = id();
+        const dbref = ref(db);
+                get(child(dbref, "Thedatas/" + username))
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                       if(email==snapshot.val().Email){
+                        alert("Vous avez déjà un compte avec cet Email username")
+                       }else{
+                        alert("Un compte existe déjà avec cet  username")
+                       }
+                    } else {
+                      
+            set(ref(db, "Thedatas/" + username), {
+                Idproduct: idproduct,
+                Fullname: fullname,
+                Username: username,
+                Email: email,
+                Password: password,
+                Confirmpassword: confirmpassword,
+            })
+                .then(() => {
+                    localStorage.setItem("storageName", email);
+                    localStorage.setItem("storageUserName", username);
+                    window.location.href = "smsemail.html"
+                })
+                .catch((error) => {
+                    alert("les données ne sont pas envoyés " + error);
+                });
+                    }
+                })
+                .catch((error) => {
+                    alert("il y a une ERROR " + error);
+                });
+      }
+      
+        window.submitmy = submitmy;
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+  </body>
 </html>
