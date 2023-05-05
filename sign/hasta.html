@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>sms de confirmation d'email d'envoi</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="./../assets/img/favicon.png" rel="icon">
+  <link href="./../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="./../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="./../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="./../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="./../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="./../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="./../assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <section id="hero" style="height: 100vh !important;">
+    <div class="hero-content" data-aos="fade-up">
+      <h2>illicolove <span>vous envoyez un</span><br>lien de confirmation !</h2>
+      <div>
+        <a href="#portfolio" class="btn-projects scrollto" id="CONSULTEZLESANNONCES">CONSULTEZ LES ANNONCES</a>
+      </div>
+    </div>
+
+    <div class="hero-slider swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background-image: url('assets/img/hero-carousel/1.jpg');"></div>
+        <div class="swiper-slide" style="background-image: url('assets/img/hero-carousel/2.jpg');"></div>
+        <div class="swiper-slide" style="background-image: url('assets/img/hero-carousel/3.jpg');"></div>
+        <div class="swiper-slide" style="background-image: url('assets/img/hero-carousel/4.jpg');"></div>
+        <div class="swiper-slide" style="background-image: url('assets/img/hero-carousel/5.jpg');"></div>
+      </div>
+    </div>
+
+  </section><!-- End Hero Section -->
+  <!-- Vendor JS Files -->
+  <script src="./../assets/vendor/aos/aos.js"></script>
+  <script src="./../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="./../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="./../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="./../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="./../assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="./../assets/js/main.js"></script>
+    
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+  <script type="module">
+
+    function submitmy(){
+    const signInBtn = document.getElementById("signIn");
+    const signUpBtn = document.getElementById("signUp");
+    const fistForm = document.getElementById("form1");
+    const secondForm = document.getElementById("form2");
+    const container = document.querySelector(".container");
+
+        // Initialisez Firebase
+    var firebaseConfig = {
+        apiKey: "AIzaSyBoOxLmlH9WR7si2Y0R01OM3c5I1wgnuPM",
+        authDomain: "illicolove-7c904.firebaseapp.com",
+        databaseURL: "https://illicolove-7c904-default-rtdb.firebaseio.com",
+        projectId: "illicolove-7c904",
+        storageBucket: "illicolove-7c904.appspot.com",
+        messagingSenderId: "1086957054874",
+        appId: "1:1086957054874:web:4f1899c85184210e482823"
+    };
+    
+    firebase.initializeApp(firebaseConfig);
+
+    const UserConnect = localStorage.getItem("storageName");
+    // Créez une instance de l'objet d'authentification Firebase
+    var auth = firebase.auth();
+    const email = "developperfullstacksenou@gmail.com"
+    // Vérifiez si un lien de connexion a déjà été envoyé à l'adresse e-mail
+    auth.fetchSignInMethodsForEmail(email)
+    .then(function(signInMethods) {
+    if (signInMethods.indexOf("emailLink") !== -1) {
+        // Un lien de connexion a déjà été envoyé à cette adresse e-mail
+        // Affichez un message à l'utilisateur pour l'en informer
+        alert("Un lien de connexion a déjà été envoyé à cette adresse e-mail. Veuillez vérifier votre boîte de réception et suivre les instructions pour vous connecter.");
+    } else {
+        // Envoyez le lien de connexion unique à l'adresse e-mail de l'utilisateur
+        auth.sendSignInLinkToEmail(email, {
+        url: 'https://becare666.github.io/illicolove-/sign/login.html', // URL de votre application
+        handleCodeInApp: true
+        }).then(function() {
+        // Le lien a été envoyé avec succès
+        // Affichez un message à l'utilisateur pour lui indiquer qu'il doit consulter son e-mail
+        alert("Un lien de connexion a été envoyé à votre adresse e-mail. Veuillez vérifier votre boîte de réception et suivre les instructions pour vous connecter." + UserConnect);
+        }).catch(function(error) {
+        // Une erreur s'est produite lors de l'envoi du lien de connexion
+        // Affichez un message d'erreur à l'utilisateur
+        alert("Une erreur s'est produite lors de l'envoi du lien de connexion: " + error.message);
+        });
+    }
+    })
+    .catch(function(error) {
+    // Une erreur s'est produite lors de la vérification des méthodes de connexion disponibles pour l'adresse e-mail
+    // Affichez un message d'erreur à l'utilisateur
+    alert("Une erreur s'est produite lors de la vérification des méthodes de connexion disponibles pour cette adresse e-mail: " + error.message);
+    });
+
+      }
+      window.onload = submitmy
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-auth.js"></script>
+</body>
+
+</html>
+    
+    
+    
+    
+    
+    

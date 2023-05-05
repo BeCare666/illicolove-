@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Afficher les 3 premiers éléments d'un tableau</title>
+  </head>
+  <body>
+    
+    
+    <script>
+    const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let index = 0;
+    let compteur = 0;
+    let liste = null; // ajouter cette variable pour stocker l'élément ul parent
+
+    function afficherElements() {
+    const elements = array.slice(index, index + 3); // Extraire 3 éléments à partir de l'index actuel
+    index += 3; // Augmenter l'index de 3 pour la prochaine fois
+    
+    if (elements.length === 0) {
+        console.log('Fin du tableau');
+        return;
+    }
+    
+    // Supprimer la liste précédente si le compteur est supérieur à 1
+    if (compteur > 0) {
+        document.body.removeChild(liste);
+    }
+    
+    const nouveauTableau = document.createElement('ul');
+    for (const element of elements) {
+        const nouvelElement = document.createElement('li');
+        nouvelElement.innerText = element;
+        nouveauTableau.appendChild(nouvelElement);
+    }
+    
+    document.body.appendChild(nouveauTableau);
+    liste = nouveauTableau; // stocker l'élément ul parent
+    compteur++; // augmenter le compteur de clics
+    }
+
+    const bouton = document.createElement('button');
+    bouton.innerText = 'Afficher les éléments';
+    bouton.addEventListener('click', afficherElements);
+    document.body.appendChild(bouton);
+
+
+
+
+
+
+
+
+
+
+    // Initialiser l'application Firebase et vous authentifier
+const firebaseConfig = { /* votre configuration Firebase */ };
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+let index1 = 0;
+let compteur1 = 0;
+let liste1 = null;
+
+function afficherElements() {
+  db.collection("utilisateur")
+    .limit(3)
+    .offset(index)
+    .get()
+    .then((querySnapshot) => {
+      const elements = querySnapshot.docs.map(doc => doc.data());
+      index += 3;
+      
+      if (elements.length === 0) {
+        console.log('Fin de la base de données');
+        return;
+      }
+      
+      if (compteur > 0) {
+        document.body.removeChild(liste);
+      }
+      
+      const nouveauTableau = document.createElement('ul');
+      for (const element of elements) {
+        const nouvelElement = document.createElement('li');
+        nouvelElement.innerText = `${element.nom} ${element.prenom} - ${element.telephone}`;
+        nouveauTableau.appendChild(nouvelElement);
+      }
+      
+      document.body.appendChild(nouveauTableau);
+      liste = nouveauTableau;
+      compteur++;
+    })
+    .catch((error) => {
+      console.log("Erreur : ", error);
+    });
+}
+
+const bouton = document.createElement('button');
+bouton.innerText = 'Afficher les éléments';
+bouton.addEventListener('click', afficherElements);
+document.body.appendChild(bouton);
+
+    </script>
+  </body>
+</html>

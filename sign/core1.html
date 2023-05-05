@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sélection d'une adresse e-mail dans Firebase</title>
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+        <script
+            src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+        <script src="firebase.js"></script>
+    </head>
+    <body>
+        <h1>Sélection d'une adresse e-mail dans Firebase</h1>
+        <label for="email-input">Entrez l'adresse e-mail :</label><br>
+        <input type="email" id="email-input" name="email-input"><br>
+        <button id="search-button">Rechercher</button>
+        <div id="result"></div>
+<script>
+        // Configuration de Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyBoOxLmlH9WR7si2Y0R01OM3c5I1wgnuPM",
+          authDomain: "illicolove-7c904.firebaseapp.com",
+          databaseURL: "https://illicolove-7c904-default-rtdb.firebaseio.com",
+          projectId: "illicolove-7c904",
+          storageBucket: "illicolove-7c904.appspot.com",
+          messagingSenderId: "1086957054874",
+          appId: "1:1086957054874:web:4f1899c85184210e482823"
+};
+firebase.initializeApp(firebaseConfig);
+
+// Référence Firebase contenant les adresses e-mails
+const emailRef = firebase.database().ref('emails');
+
+// Écoute de l'événement "click" sur le bouton de recherche
+const searchButton = document.getElementById('search-button');
+searchButton.addEventListener('click', () => {
+  const emailInput = document.getElementById('email-input').value;
+  let emailKey = null;
+
+  // Filtrage des données pour trouver l'adresse e-mail spécifique
+  emailRef.once('value', (snapshot) => {
+    const emails = snapshot.val();
+    for (const key in emails) {
+      if (emails.hasOwnProperty(key) && emails[key].email === emailInput) {
+        emailKey = key;
+        break;
+      }
+    }
+
+    if (emailKey) {
+      // L'adresse e-mail a été trouvée
+      const email = emails[emailKey];
+      const message = `L'adresse e-mail ${email.email} a été trouvée dans Firebase !`;
+      document.getElementById("result").innerHTML = message;
+    } else {
+      // L'adresse e-mail n'a pas été trouvée
+      const message = `L'adresse e-mail ${emailInput} n'a pas été trouvée dans Firebase.`;
+      document.getElementById("result").innerHTML = message;
+    }
+  });
+});
+
+    </script>
+    </body>
+</html>

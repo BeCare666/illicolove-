@@ -1,0 +1,118 @@
+.card {
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    position: relative;
+  }
+  
+  .card-header {
+    background-color: #0066CC;
+    color: #FFF;
+    padding: 20px;
+  }
+  
+  .card-header img {
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 10px;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .card-header h2 {
+    font-size: 24px;
+    margin-bottom: 0;
+  }
+  
+  .card-header p {
+    font-size: 16px;
+    margin-top: 0;
+  }
+  
+  .social-icons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+  
+  .social-icons li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  
+  .social-icons a {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #FFF;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: #0066CC;
+    transition: all 0.3s ease;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .social-icons a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-footer {
+    background-color: #F5F5F5;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .card-footer a {
+    background-color: #0066CC;
+    border-radius: 5px;
+    color: #FFF;
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  .card:hover {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        background-color: #f5f5f5;
+        transition: background-color 0.3s ease;
+        }
+        @keyframes heartbeat {
+            0% {
+            transform: scale(1);
+            }
+            50% {
+            transform: scale(1.2);
+            }
+            100% {
+            transform: scale(1);
+            }
+            }
+            
+            .heart-icon {
+            animation-name: heartbeat;
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            }

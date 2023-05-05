@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="signup.css">
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script
+        src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
   </head>
   <body>
     <form action="javascript:submitmy()">
@@ -35,6 +38,7 @@
         <span class="label-text">Password</span>
         <span class="nav-dot"></span>
       </label>
+     
       <input id="input-5" type="text"
         placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required />
       <label for="input-5">
@@ -44,16 +48,10 @@
       <button type="submit">Create Your Account</button>
       <p class="tip">Press Tab</p>
       <div class="signup-button">Sign Up</div>
+      <link rel="stylesheet" href="">
     </form>
-    <script type="module">
-
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
+    <script>
+      const firebaseConfig = {
           apiKey: "AIzaSyBoOxLmlH9WR7si2Y0R01OM3c5I1wgnuPM",
           authDomain: "illicolove-7c904.firebaseapp.com",
           databaseURL: "https://illicolove-7c904-default-rtdb.firebaseio.com",
@@ -61,79 +59,96 @@
           storageBucket: "illicolove-7c904.appspot.com",
           messagingSenderId: "1086957054874",
           appId: "1:1086957054874:web:4f1899c85184210e482823"
-        };
+    };
+    firebase.initializeApp(firebaseConfig);
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
+    // Référence Firebase contenant les adresses e-mails
+    const emailRef = firebase.database().ref('emails');
 
-
-        import {
-            getDatabase,
-            ref,
-            set,
-            update,
-            child,
-            onValue,
-            remove,
-            get,
-        } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
-
-        import { getStorage, getDownloadURL 
-        } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js"
-
-     const db = getDatabase();
-     
-      function submitmy(){
+    // Écoute de l'événement "click" sur le bouton de recherche
+    function submitmy(){
       var fullname = document.getElementById('input-1').value
       var username = document.getElementById('input-2').value
-      var email = document.getElementById('input-3').value
+      const email = document.getElementById('input-3').value;
       var password = document.getElementById('input-4').value
       var confirmpassword = document.getElementById('input-5').value
+      
+      const emailInput = document.getElementById('input-3').value;
+      let emailKey = null;
 
-        //--------------function to generate unique ID
+      // Filtrage des données pour trouver l'adresse e-mail spécifique
+      emailRef.once('value', (snapshot) => {
+        const emails = snapshot.val();
+        for (const key in emails) {
+          if (emails.hasOwnProperty(key) && emails[key].email === emailInput) {
+            emailKey = key;
+            break;
+          }
+        }
+
+        if (emailKey) {
+          // L'adresse e-mail a été trouvée
+          const email = emails[emailKey];
+          alert(`L'adresse e-mail ${email.email} de ${emailKey}a été trouvée dans Firebase !`)
+        } else {
+          // L'adresse e-mail n'a pas été trouvée
+        //alert(`L'adresse e-mail ${emailInput} n'a pas été trouvée dans Firebase.`)
         var id = () => {
             return Math.floor((1 + Math.random()) * 0x10000)
                 .toString(16)
                 .substring(1);
         }
-        const idproduct = id();
-        const dbref = ref(db);
-                get(child(dbref, "Thedatas/" + username))
-                .then((snapshot) => {
-                    if (snapshot.exists()) {
-                       if(email==snapshot.val().Email){
-                        alert("Vous avez déjà un compte avec cet Email username")
-                       }else{
-                        alert("Un compte existe déjà avec cet  username")
-                       }
-                    } else {
-                      
-            set(ref(db, "Thedatas/" + username), {
-                Idproduct: idproduct,
-                Fullname: fullname,
-                Username: username,
-                Email: email,
-                Password: password,
-                Confirmpassword: confirmpassword,
-            })
-                .then(() => {
-                    localStorage.setItem("storageName", email);
-                    localStorage.setItem("storageUserName", username);
-                    window.location.href = "smsemail.html"
-                })
-                .catch((error) => {
-                    alert("les données ne sont pas envoyés " + error);
-                });
-                    }
-                })
-                .catch((error) => {
-                    alert("il y a une ERROR " + error);
-                });
-      }
-      
-        window.submitmy = submitmy;
+        const userId = id();
+        // Récupération de l'adresse mail entrée par l'utilisateur
+        // Envoi de l'adresse mail à Firebase
+
+        firebase.database().ref('emails/' + userId).set({
+            email: email,
+            fullname: fullname,
+            username : username,
+            password : password,
+            confirmpassword : confirmpassword,
+            MAVILLEDERESIDENCE : "",
+            MANATIONNALITE : "",
+            MONTRAVAILLEOUOCCUPATION : "",
+            MASITUATIONMATRIMONIALE : "",
+            MONAGE:"",
+            MATAILLE:"",
+            MONPOIDS:"",
+            MONTEINT:"",
+            QUESTIONUNIQUE:"",
+            COMPTECREDIT: 3,
+            MONPAYSDEPUBLICATION:"",
+            VALIDERMONCOMPTE:false,
+            COMPTEFACEBOOK:"",
+            COMPTEINSATAGRAMME:"",
+            MONSEXE:"",
+            TELEPHONE:"",
+            JEVEUXUNERENCONTRE:"",
+            PIECESDIDENTITE:"",
+            MESDEUXPHOTOS:"",
+            SEXEDEPROFILQUEJECHERCHE:"",
+            SONAGEDEPROFILQUEJECHERCHE:"",
+            SITUATIONMATRIMONIALEDEPROFILQUEJECHERCHE:"",
+            PAYSDERESIDENCEDEPROFILQUEJECHERCHE:"",
+            PHYSIQUEDEPROFILQUEJECHERCHE:"",
+            VILLEDHABITATIONDEPROFILQUEJECHERCHE:"",
+            TRAVAILDEDEPROFILQUEJECHERCHE:"",
+            AUTRESPRECISIONSDEPROFILQUEJECHERCHE:"",
+
+        }).then(() => {
+            alert("Adresse mail envoyée à Firebase !");
+            localStorage.setItem('unserconnect', userId)
+            localStorage.setItem('unserconnectmail', email)
+            window.location.href = "smsemail.html"
+        }).catch((error) => {
+            alert("Erreur lors de l'envoi de l'adresse mail à Firebase :", error);
+        });
+
+        }
+      });
+    }
+  
     </script>
-    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
   </body>
 </html>

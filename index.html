@@ -26,6 +26,20 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <script>
+    window.onload = function(){
+      if (/Mobi|Android/i.test(navigator.userAgent)) {
+    // Code pour appareil mobile
+    //document.body.style.fontSize = "16px"; // Modifier la taille de la police pour appareils mobiles
+    document.getElementById('myiframe').style.height = "190vh"
+    } else {
+        // Code pour ordinateur de bureau
+        //document.body.style.fontSize = "18px"; // Modifier la taille de la police pour ordinateurs de bureau
+        document.getElementById('myiframe').style.height = "90vh"
+        document.getElementById('myiframe').style.marginTop = "10vh"
+    }
+    }
+  </script>
 </head>
 
 <body>
@@ -92,8 +106,8 @@
     <div class="hero-content" data-aos="fade-up">
       <h2>Making <span>your ideas</span><br>happen!</h2>
       <div>
-        <a href="choix.html" class="btn-get-started scrollto" id="PUBLIEZUNEANNONCE">PUBLIEZ UNE ANNONCE</a>
-        <a href="#portfolio" class="btn-projects scrollto" id="CONSULTEZLESANNONCES">CONSULTEZ LES ANNONCES</a>
+        <a href="#" class="btn-get-started scrollto annoncy" id="PUBLIEZUNEANNONCE">PUBLIEZ UNE ANNONCE</a>
+        <a href="#" class="btn-projects scrollto annoncy" id="CONSULTEZLESANNONCES">CONSULTEZ LES ANNONCES</a>
       </div>
     </div>
 
@@ -109,46 +123,14 @@
 
   </section><!-- End Hero Section -->
   </div>
-  <main id="main">
-    <div class="modal fade" id="exampleModalCenterAllMessage" tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <span id="idObjetMessage"></span>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <span id="idEmailMessage"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="close" data-dismiss="modal"
-                    aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p id="idMysmsSend"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn
-                    btn-danger" id="DelbtnMymesms"><i
-                        class="bi bi-trash"></i>&nbsp;
-                    Supprimer</button>
-            </div>
-        </div>
+  <main id="main" style="display: none;" >
+    <div class="responsive-iframe">
+      <iframe src="choix.html" frameborder="0" scrolling="no" style="width: 100%; margin-top: 10px;" id="myiframe"></iframe>
     </div>
-</div>
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer">
+  <footer id="footer" >
     <div class="container">
       <div class="copyright">
         &copy; Copyright <strong>Reveal</strong>. All Rights Reserved
@@ -165,8 +147,18 @@
     </div>
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
- 
+ <!-- <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> -->
+
+  <script>
+    var Annoncy = document.querySelectorAll('.annoncy');
+    Annoncy.forEach((q)=>{
+      q.addEventListener('click', function(){
+         document.getElementById('myheaderid').style.display = "none"
+         document.getElementById('footer').style.display = "none"
+         document.getElementById('main').style.display = "block"
+      })
+    })
+  </script>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

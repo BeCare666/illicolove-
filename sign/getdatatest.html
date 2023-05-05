@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+        <script
+            src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+    </head>
+    <body>
+    <img src="" alt="" id="photo">
+
+        <script type="module">
+         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+      const firebaseConfig = {
+          apiKey: "AIzaSyBoOxLmlH9WR7si2Y0R01OM3c5I1wgnuPM",
+          authDomain: "illicolove-7c904.firebaseapp.com",
+          databaseURL: "https://illicolove-7c904-default-rtdb.firebaseio.com",
+          projectId: "illicolove-7c904",
+          storageBucket: "illicolove-7c904.appspot.com",
+          messagingSenderId: "1086957054874",
+          appId: "1:1086957054874:web:4f1899c85184210e482823"
+    };
+            // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        import {
+            getDatabase,
+            ref,
+            set,
+            update,
+            child,
+            onValue,
+            remove,
+            get,
+        } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+
+        import { getStorage, getDownloadURL 
+        } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js"
+
+        const db = getDatabase();
+        function getdata() {
+        var idmyuser = '7bd1'
+        const dbref = ref(db);
+        get(child(dbref, "utilisateur/" + idmyuser))
+            .then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val().MAVILLEDERESIDENCE)
+                var photoDataUrl = 'data:image/png;base64,' + snapshot.val().MAVILLEDERESIDENCE;
+                var photoElement = document.getElementById("photo");
+                photoElement.src = photoDataUrl;
+            } else {
+                alert("no data");
+            }
+            })
+            .catch((error) => {
+            alert("il y a une ERROR " + error);
+            });
+        }
+
+window.onload = getdata;
+</script>
+</body>
+</html>

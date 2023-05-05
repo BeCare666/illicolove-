@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script
+        src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+  </head>
+  <body>
+    <h1>Envoyer une photo à Firebase</h1>
+    <input type="file" id="input-file">
+
+    <script>
+      const firebaseConfig = {
+          apiKey: "AIzaSyBoOxLmlH9WR7si2Y0R01OM3c5I1wgnuPM",
+          authDomain: "illicolove-7c904.firebaseapp.com",
+          databaseURL: "https://illicolove-7c904-default-rtdb.firebaseio.com",
+          projectId: "illicolove-7c904",
+          storageBucket: "illicolove-7c904.appspot.com",
+          messagingSenderId: "1086957054874",
+          appId: "1:1086957054874:web:4f1899c85184210e482823"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+
+          // Sélectionnez l'élément HTML de l'input file qui permet à l'utilisateur de sélectionner une photo
+          var inputElement = document.getElementById("input-file");
+
+        // Ajoutez un gestionnaire d'événements pour écouter le changement de fichier
+        inputElement.addEventListener("change", handleFiles, false);
+
+        function handleFiles() {
+        // Récupérez le fichier sélectionné par l'utilisateur
+        var file = this.files[0];
+        console.log("Fichier sélectionné : ", file);
+
+        // Créez une nouvelle instance de FileReader
+        var reader = new FileReader();
+
+        // Ajoutez un gestionnaire d'événements pour écouter la fin de la lecture du fichier
+        reader.onload = function(event) {
+        // Récupérez le contenu du fichier sous forme de tableau d'octets
+        var fileContent = new Uint8Array(event.target.result);
+        console.log("Contenu du fichier : ", fileContent);
+
+        // Convertissez le tableau d'octets en une chaîne de caractères codée en base64
+        var base64Content = btoa(String.fromCharCode.apply(null, fileContent));
+        console.log("Contenu en base64 : ", base64Content);
+
+        //alert(`L'adresse e-mail ${emailInput} n'a pas été trouvée dans Firebase.`)
+        var id = () => {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+        }
+        const userId = id();
+        // Récupération de l'adresse mail entrée par l'utilisateur
+        // Envoi de l'adresse mail à Firebase
+
+        firebase.database().ref('utilisateur/' + userId).set({
+            email: "email",
+            fullname: "fullname",
+            username : "username",
+            password : "password",
+            confirmpassword : "confirmpassword",
+            MAVILLEDERESIDENCE : base64Content,
+            MANATIONNALITE : "",
+            MONTRAVAILLEOUOCCUPATION : "",
+            MASITUATIONMATRIMONIALE : "",
+            MONAGE:"",
+            MATAILLE:"",
+            MONPOIDS:"",
+            MONTEINT:"",
+            QUESTIONUNIQUE:"",
+            COMPTECREDIT: 3,
+            MONPAYSDEPUBLICATION:"",
+            VALIDERMONCOMPTE:false,
+            COMPTEFACEBOOK:"",
+            COMPTEINSATAGRAMME:"",
+            MONSEXE:"",
+            TELEPHONE:"",
+            JEVEUXUNERENCONTRE:"",
+            PIECESDIDENTITE:"",
+            MESDEUXPHOTOS:"",
+            SEXEDEPROFILQUEJECHERCHE:"",
+            SONAGEDEPROFILQUEJECHERCHE:"",
+            SITUATIONMATRIMONIALEDEPROFILQUEJECHERCHE:"",
+            PAYSDERESIDENCEDEPROFILQUEJECHERCHE:"",
+            PHYSIQUEDEPROFILQUEJECHERCHE:"",
+            VILLEDHABITATIONDEPROFILQUEJECHERCHE:"",
+            TRAVAILDEDEPROFILQUEJECHERCHE:"",
+            AUTRESPRECISIONSDEPROFILQUEJECHERCHE:"",
+
+        }).then(() => {
+            alert("Adresse mail envoyée à Firebase !");
+            localStorage.setItem('unserconnect', userId)
+            localStorage.setItem('unserconnectmail', email)
+            window.location.href = "smsemail.html"
+        }).catch((error) => {
+            alert("Erreur lors de l'envoi de l'adresse mail à Firebase :", error);
+        });
+        };
+
+        // Commencez la lecture du fichier
+        reader.readAsArrayBuffer(file);
+        }
+
+    </script>
+  </body>
+</html>

@@ -7,53 +7,78 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
-<body>
+<body >
 
     <!-- MultiStep Form -->
-<div class="row">
+<div class="row" >
     <div class="col-md-6 col-md-offset-3">
         <form id="msform">
             <!-- progressbar -->
             <ul id="progressbar">
-                <li class="active">Personal Details</li>
-                <li>Social Profiles</li>
-                <li>Account Setup</li>
+                <li class="active">MON PROFIL</li>
+                <li>MON PROFIL</li>
+                <li>MON PROFIL</li>
+                <li>PROFIL QUE JE CHERCHE</li>
+                <li>PROFIL QUE JE CHERCHE</li>
             </ul>
             <!-- fieldsets -->
             <fieldset>
-                <h2 class="fs-title">Personal Details</h2>
-                <h3 class="fs-subtitle">Tell us something more about you</h3>
-                <input type="text" name="fname" placeholder="First Name"/>
-                <input type="text" name="lname" placeholder="Last Name"/>
-                <input type="text" name="phone" placeholder="Phone"/>
-                 <input type="text" name="fname" placeholder="First Name"/>
-                <input type="text" name="lname" placeholder="Last Name"/>
-                <input type="text" name="phone" placeholder="Phone"/>
+                <h2 class="fs-title">DONNÉES PERSONNELLES</h2>
+                <h3 class="fs-subtitle">Parlez-nous un peu de vous</h3>
+                <input type="text" name="fname" placeholder="Ma Ville de résidence"/>
+                <input type="text" name="lname" placeholder="Nom et Prénoms"/>
+                <input type="text" name="lname" placeholder="Ma nationalité"/>
+                <input type="text" name="phone" placeholder="Mon travail ou occupation"/>
+                <input type="text" name="lname" placeholder="Ma situation matrimoniale:"/>
                 <input type="button" name="next" class="next action-button" value="Next"/>
             </fieldset>
             <fieldset>
-                <h2 class="fs-title">Social Profiles</h2>
-                <h3 class="fs-subtitle">Your presence on the social network</h3>
-                <input type="text" name="twitter" placeholder="Twitter"/>
-                <input type="text" name="facebook" placeholder="Facebook"/>
-                <input type="text" name="gplus" placeholder="Google Plus"/>
+                <h2 class="fs-title">Mes caratéristiques</h2>
+                <h3 class="fs-subtitle">Parlez-nous un peu de vous</h3>
+                <input type="text" name="twitter" placeholder="Mon âge "/>
+                <input type="text" name="facebook" placeholder="Ma taille"/>
+                <input type="text" name="gplus" placeholder="Mon poids"/>
+                <input type="text" name="gplus" placeholder="Mon teint"/>
+                <input type="text" name="gplus" placeholder="Mon sexe"/>
                 <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
                 <input type="button" name="next" class="next action-button" value="Next"/>
             </fieldset>
             <fieldset>
-                <h2 class="fs-title">Create your account</h2>
-                <h3 class="fs-subtitle">Fill in your credentials</h3>
-                <input type="text" name="email" placeholder="Email"/>
-                <input type="password" name="pass" placeholder="Password"/>
-                <input type="password" name="cpass" placeholder="Confirm Password"/>
+                <h2 class="fs-title"> Prouvez votre identité</h2>
+                <h3 class="fs-subtitle">Prouvez nous votre vraie identité</h3>
+                <input type="text" name="twitter" placeholder="votre adresse mail"/>
+                <input type="text" name="facebook" placeholder="téléphone"/>
+                <input type="text" name="facebook" placeholder="Je veux une rencontre "/>
+                <input type="text" name="gplus" placeholder="Pièce d'identité"/>
+                <input type="text" name="gplus" placeholder="Deux de vos Photos"/>
+                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                <input type="button" name="next" class="next action-button" value="Next"/>
+            </fieldset>
+            <fieldset>
+                <h2 class="fs-title"> PROFIL QUE JE CHERCHE</h2>
+                <h3 class="fs-subtitle">Parlez-nous un peu de votre âme sœur</h3>
+                <input type="text" name="twitter" placeholder="Son sexe"/>
+                <input type="text" name="facebook" placeholder="Sa tranche d'âge"/>
+                <input type="text" name="facebook" placeholder="Sa situation matrimoniale"/>
+                <input type="text" name="gplus" placeholder="4-Son pays de résidence"/>
+                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                <input type="button" name="next" class="next action-button" value="Next"/>
+            </fieldset>
+            <fieldset>
+                <h2 class="fs-title">PROFIL QUE JE CHERCHE</h2>
+                <h3 class="fs-subtitle">Parlez-nous un peu de votre âme sœur</h3>
+                <input type="text" name="email" placeholder="5-Vos préférences physiques"/>
+                <input type="password" name="pass" placeholder="Sa ville d'habitation:"/>
+                <input type="password" name="pass" placeholder="Son travail ou occupation"/>
+                <input type="password" name="cpass" placeholder="Autres précisions"/>
                 <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
                 <input type="submit" name="submit" class="submit action-button" value="Submit"/>
             </fieldset>
         </form>
-        <!-- link to designify.me code snippets -->
+        <!-- link to designify.me code snippets 
         <div class="dme_link">
             <p><a href="http://designify.me/code-snippets-js/" target="_blank">More Code Snippets</a></p>
-        </div>
+        </div>-->
         <!-- /.link to designify.me code snippets -->
     </div>
 </div>
@@ -86,7 +111,7 @@ body {
 #msform {
     text-align: center;
     position: relative;
-    margin-top: 30px;
+   margin-top: 30px;
 }
 
 #msform fieldset {
@@ -196,7 +221,7 @@ body {
     color: white;
     text-transform: uppercase;
     font-size: 9px;
-    width: 33.33%;
+    width: 19.33%;
     float: left;
     position: relative;
     letter-spacing: 1px;
