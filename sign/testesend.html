@@ -10,7 +10,7 @@
   </head>
   <body>
     <h1>Envoyer une photo à Firebase</h1>
-    <input type="file" id="input-file">
+    <input type="file" id="input-file"  multiple>
 
     <script>
       // Configurer l'objet de configuration Firebase avec les clés d'API et autres informations de configuration
@@ -30,47 +30,51 @@
       // Récupérer une référence à la base de données
       var database = firebase.database();
 
-      // Sélectionnez l'élément HTML de l'input file qui permet à l'utilisateur de sélectionner une photo
-      var inputElement = document.getElementById("input-file");
+// function to upload photo files
+// Sélectionnez l'élément HTML de l'input file qui permet à l'utilisateur de sélectionner les photos
+var inputElement = document.getElementById("input-file");
 
-      // Ajoutez un gestionnaire d'événements pour écouter le changement de fichier
-      inputElement.addEventListener("change", handleFiles, false);
+// Ajoutez un gestionnaire d'événements pour écouter le changement de fichier
+inputElement.addEventListener("change", handleFiles, false);
 
-   function handleFiles() {
-  // Récupérez le fichier sélectionné par l'utilisateur
-  var file = this.files[0];
-  console.log("Fichier sélectionné : ", file);
+function handleFiles() {
+  // Récupérez les fichiers sélectionnés par l'utilisateur
+  var files = this.files;
 
-  // Créez une nouvelle instance de FileReader
-  var reader = new FileReader();
+  // Vérifiez si exactement deux fichiers ont été sélectionnés
+  if (files.length !== 2) {
+    alert("Veuillez sélectionner exactement deux photos.");
+    return;
+  }
 
-  // Ajoutez un gestionnaire d'événements pour écouter la fin de la lecture du fichier
-  reader.onload = function(event) {
-    // Récupérez le contenu du fichier sous forme de tableau d'octets
-    var fileContent = new Uint8Array(event.target.result);
-    console.log("Contenu du fichier : ", fileContent);
+  console.log("Fichiers sélectionnés : ", files);
 
-    // Convertissez le tableau d'octets en une chaîne de caractères codée en base64
-    var base64Content = btoa(String.fromCharCode.apply(null, fileContent));
-    console.log("Contenu en base64 : ", base64Content);
+  // Parcourez chaque fichier
+  for (var i = 0; i < files.length; i++) {
+    // Récupérez le fichier actuel
+    var file = files[i];
+    console.log("Fichier " + (i + 1) + " : ", file);
 
-    // Stockez la chaîne de caractères base64 dans votre base de données
-    firebase.firestore().collection("utilisateurs").doc("utilisateur1").set({
-      nom: "Doe",
-      prenom: "John",
-      photo: base64Content
-    }).then(function() {
-      console.log("Données utilisateur enregistrées avec succès.");
-    }).catch(function(error) {
-      console.error("Erreur lors de l'enregistrement des données utilisateur : ", error);
-    });
-  };
+    // Créez une nouvelle instance de FileReader
+    var reader = new FileReader();
 
-  // Commencez la lecture du fichier
-  reader.readAsArrayBuffer(file);
+    // Ajoutez un gestionnaire d'événements pour écouter la fin de la lecture du fichier
+    reader.onload = function(event) {
+      // Récupérez le contenu du fichier sous forme de tableau d'octets
+      var fileContent = new Uint8Array(event.target.result);
+      console.log("Contenu du fichier " + (i + 1) + " : ", fileContent);
+
+      // Convertissez le tableau d'octets en une chaîne de caractères codée en base64
+      var base64Content = btoa(String.fromCharCode.apply(null, fileContent));
+      console.log("Contenu en base64 du fichier " + (i + 1) + " : ", base64Content);
+    }
+
+    // Commencez la lecture du fichier
+    reader.readAsArrayBuffer(file);
+  }
 }
 
-    </script>
+ </script>
 
   </body>
 </html>

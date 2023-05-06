@@ -72,7 +72,7 @@
     
       const UserConnectuser = localStorage.getItem("unserconnect");
         const dbref = ref(db);
-                get(child(dbref, "emails/" + UserConnectuser))
+                get(child(dbref, "utilisateurs/" + UserConnectuser))
                 .then((snapshot) => {
                     if (snapshot.exists()) {
                        if(username == snapshot.val().username && password == snapshot.val().password){

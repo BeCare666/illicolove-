@@ -102,7 +102,8 @@
         // Récupération de l'adresse mail entrée par l'utilisateur
         // Envoi de l'adresse mail à Firebase
 
-        firebase.database().ref('emails/' + userId).set({
+        firebase.database().ref('utilisateurs/' + userId).set({
+            userId : userId,
             email: email,
             fullname: fullname,
             username : username,
@@ -124,9 +125,10 @@
             COMPTEINSATAGRAMME:"",
             MONSEXE:"",
             TELEPHONE:"",
-            JEVEUXUNERENCONTRE:"",
+            JEVEUXUNERENCONTRE:"", 
             PIECESDIDENTITE:"",
             MESDEUXPHOTOS:"",
+            MESDEUXPHOTO2:"",
             SEXEDEPROFILQUEJECHERCHE:"",
             SONAGEDEPROFILQUEJECHERCHE:"",
             SITUATIONMATRIMONIALEDEPROFILQUEJECHERCHE:"",
