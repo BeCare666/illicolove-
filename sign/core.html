@@ -1,49 +1,198 @@
+
+
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<title>Envoi d'une adresse mail à Firebase</title>
-	<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
-	<script src="firebase.js"></script>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Reveal Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+ 
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
 </head>
+
 <body>
-	<h1>Envoi d'une adresse mail à Firebase</h1>
-	<form>
-		<label for="email">Entrez votre adresse mail :</label><br>
-		<input type="email" id="email" name="email"><br>
-        <input type="text" id="user" name="email"><br>
-		<input type="button" value="Envoyer" onclick="sendData()">
-	</form>
-    <script>
-        // Configuration de Firebase
-        const firebaseConfig = {
-         apiKey: "AIzaSyBoOxLmlH9WR7si2Y0R01OM3c5I1wgnuPM",
-          authDomain: "illicolove-7c904.firebaseapp.com",
-          databaseURL: "https://illicolove-7c904-default-rtdb.firebaseio.com",
-          projectId: "illicolove-7c904",
-          storageBucket: "illicolove-7c904.appspot.com",
-          messagingSenderId: "1086957054874",
-          appId: "1:1086957054874:web:4f1899c85184210e482823"
-        };
-        firebase.initializeApp(firebaseConfig);
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <div id="activemyIdt">
+            <div class="toast activemyId"  > 
+                <div class="toast-content">
+                    <i class="fas fa-solid fa-check check"></i>
+                    <div class="message">
+                    <span class="text text-1">Success</span>
+                    <span class="text text-2">Your changes has been saved</span>
+                    </div>
+                   
+                </div>
+                <i class="fa-solid fa-xmark close"></i>
+                <!-- Remove 'activemyId' class, this is just to show in Codepen thumbnail -->
+                <div class="progress activemyId"></div>
+                </div> 
+                <style>
+                    #activemyIdt  .toast {
+                      position: absolute;
+                      top: 25px;
+                      right: 30px;
+                      border-radius: 12px;
+                      background: #fff;
+                      padding: 20px 35px 20px 25px;
+                      box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.1);
+                      overflow: hidden;
+                      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+                      animation: shake 0.7s cubic-bezier(.36,.07,.19,.97) forwards, disappear 0.3s linear 4.5s forwards;
+                      }
+              
+                      #activemyIdt .toast.activemyId {
+                      transform: translateX(0%);
+                      }
+              
+                      #activemyIdt .toast .toast-content {
+                      display: flex;
+                      align-items: center;
+                      }
+              
+                      #activemyIdt .toast-content .message {
+                      display: flex;
+                      flex-direction: column;
+                      margin: 0 20px;
+                      }
+              
+                      #activemyIdt .message .text {
+                      font-size: 16px;
+                      font-weight: 400;
+                      color: #666666;
+                      }
+              
+                      #activemyIdt .message .text.text-1 {
+                      font-weight: 600;
+                      color: #333;
+                      }
+              
+                      #activemyIdt  .toast .close {
+                      position: absolute;
+                      top: 10px;
+                      right: 15px;
+                      padding: 5px;
+                      cursor: pointer;
+                      opacity: 0.7;
+                      }
+              
+                      #activemyIdt .toast .close:hover {
+                      opacity: 1;
+                      }
+              
+                      #activemyIdt  .toast .progress {
+                      position: absolute;
+                      bottom: 0;
+                      left: 0;
+                      height: 3px;
+                      width: 100%;
+              
+                      }
+              
+                      #activemyIdt .toast .progress:before {
+                      content: "";
+                      position: absolute;
+                      bottom: 0;
+                      right: 0;
+                      height: 100%;
+                      width: 100%;
+                      background-color: #4070f4;
+                      }
+              
+                      #activemyIdt .toast-content .check {
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      height: 35px;
+                      min-width: 35px;
+                      background-color: #4070f4;
+                      color: #fff;
+                      font-size: 20px;
+                      border-radius: 50%;
+                      }
+              
+              
+                      #activemyIdt .toast  .progress:before {
+                      content: "";
+                      position: absolute;
+                      bottom: 0;
+                      right: 0;
+                      height: 100%;
+                      width: 100%;
+                      background-color: #c90c0c;
+                      }
+              
+                      #activemyIdt .toast-content .check {
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      height: 35px;
+                      min-width: 35px;
+                      background-color: #c90c0c;
+                      color: #fff;
+                      font-size: 20px;
+                      border-radius: 50%;
+                      }
+                      
+                      #activemyIdt .progress.activemyId:before {
+                      animation: progress 5s linear forwards;
+                      }
+              
+                      @keyframes progress {
+                      100% {
+                          right: 100%;
+                      }
+                      }
+              
+              
+                          @keyframes shake {
+                          0% {
+                              transform: translate(0);
+                          }
+                          25% {
+                              transform: translate(3px, 3px);
+                          }
+                          50% {
+                              transform: translate(0);
+                          }
+                          75% {
+                              transform: translate(-3px, -3px);
+                          }
+                          100% {
+                              transform: translate(0);
+                          }
+                          }
+              
+                          @keyframes disappear {
+                          0% {
+                              opacity: 1;
+                          }
+                          100% {
+                              opacity: 0;
+                          }
+                          }
+                      </style>  
+        </div>
+        
 
-        // Fonction pour envoyer l'adresse mail à Firebase
-        function sendData() {
-        // Récupération de l'adresse mail entrée par l'utilisateur
-        const email = document.getElementById("email").value;
-        const user = document.getElementById("user").value;
+  </main><!-- End #main -->
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
 
-        // Envoi de l'adresse mail à Firebase
-        firebase.database().ref('emails').push({
-            email: email,
-            user : user
-        }).then(() => {
-            console.log("Adresse mail envoyée à Firebase !");
-        }).catch((error) => {
-            console.error("Erreur lors de l'envoi de l'adresse mail à Firebase :", error);
-        });
-        }
-
-    </script>
 </body>
+
 </html>
+
+
+

@@ -29,7 +29,7 @@
 
         <!-- MultiStep Form -->
         <div class="container">
-             <!--  <img src="" alt="" id="photo">-->
+            <!--  <img src="" alt="" id="photo">-->
             <div class="row">
                 <div class="col-md-6 col-lg-12"><!---col-md-offset-3-->
                     <form id="msform">
@@ -143,10 +143,10 @@
                                 Photo 1 <i class="fa fa-star required"></i></p>
                             <input type="file" id="myprofileidPhotos"
                                 name="gplus" placeholder="Deux de vos Photos"/>
-                                <p style="text-align: start !important;">
-                                    Photo 2 <i class="fa fa-star required"></i></p>
-                                <input type="file" id="myprofileidPhoto2"
-                                    name="gplus" placeholder="Deux de vos Photos"/>
+                            <p style="text-align: start !important;">
+                                Photo 2 <i class="fa fa-star required"></i></p>
+                            <input type="file" id="myprofileidPhoto2"
+                                name="gplus" placeholder="Deux de vos Photos"/>
                             <input type="button" name="previous" class="previous
                                 action-button-previous" value="Previous"/>
                             <input type="button" name="next" class="next
@@ -204,11 +204,13 @@
                             <p style="text-align: start !important;">Sa ville
                                 d'habitation <i class="fa fa-star required"></i></p>
                             <input type="text" id="myprofileidSaville"
-                                name="pass" placeholder="Sa ville d'habitation"/>
+                                name="pass" placeholder="Sa ville
+                                d'habitation"/>
                             <p style="text-align: start !important;">Son travail
                                 ou occupations <i class="fa fa-star required"></i></p>
                             <input type="text" id="myprofileidoccupations"
-                                name="pass" placeholder="Son travail occupations"/>
+                                name="pass" placeholder="Son travail
+                                occupations"/>
                             <p style="text-align: start !important;">Autres
                                 précisions <i class="fa fa-star required"></i></p>
                             <textarea type="text" id="myprofileidprécisions"
@@ -216,7 +218,8 @@
                             <input type="button" name="previous" class="previous
                                 action-button-previous" value="Previous"/>
                             <input type="submit" name="submit" class="submit
-                                action-button" value="Submit" id="sunmitannonceid"/>
+                                action-button" value="Submit"
+                                id="sunmitannonceid"/>
                         </fieldset>
                     </form>
                     <!-- link to designify.me code snippets 
@@ -283,7 +286,9 @@
         var  base64Contenttable = []
         var base64Contentphoto1table = []
         var base64Contentphoto2table = []
+        const IDREGION = localStorage.getItem("myOption")
         function getdata() {
+        alert(IDREGION)
         const dbref = ref(db);
         get(child(dbref, "utilisateurs/" + UserConnectuser))
             .then((snapshot) => {
@@ -423,6 +428,7 @@
         reader.readAsArrayBuffer(file);
     
         }
+       
         sunmitannonceid.addEventListener('click', function(){
             const PieceID = base64Contenttable.slice(-1).pop();
             const Photo1ID = base64Contentphoto1table.slice(-1).pop();
@@ -443,6 +449,7 @@
                 PIECESDIDENTITE : PieceID, 
                 MESDEUXPHOTOS : Photo1ID,
                 MESDEUXPHOTO2 : Photo2ID,
+                IDREGION : IDREGION,
                 SEXEDEPROFILQUEJECHERCHE : choicesmultipleremovebuttonSonsexe.value,
                 SONAGEDEPROFILQUEJECHERCHE : myprofileidtrancheâge.value,
                 SITUATIONMATRIMONIALEDEPROFILQUEJECHERCHE : choicesmultipleremovebuttonmatrimoniale.value,

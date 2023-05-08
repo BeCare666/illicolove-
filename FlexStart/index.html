@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>FlexStart Bootstrap Template - Index</title>
+    <title>Trouvez vos âmes soeurs</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -16,7 +16,7 @@
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
       rel="stylesheet">
-
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,20 +27,34 @@
     <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
-
   </head>
 
   <body>
-
+    <div id="activemyIdt" style="display: none;">
+      <div class="toast activemyId"  > 
+          <div class="toast-content">
+            <p id="iconid"></p>
+              <div class="message">
+                <span class="text text-1" id="etatalert"></span>
+              <span class="text text-2" id="smsalert"></span>
+            </div>            
+        </div>
+      <i class="fa-solid fa-xmark close"></i>
+      <!-- Remove 'activemyId' class, this is just to show in Codepen thumbnail 
+              <i class="fas fa-check check"></i>
+      -->
+      <div class="progress activemyId"></div>
+    </div>   
+  </div>  
     <main id="main">
-      <!-- ======= Team Section ======= -->
+      <!-- ======= alert ======= -->
       <section id="team" class="team">
 
-        <div class="container" data-aos="fade-up">
+      <div class="container" data-aos="fade-up">
 
           <header class="section-header">
-            <h2>Team</h2>
-            <p>Our hard working team</p>
+            <h2>illicolove</h2>
+            <p>Trouvez vos âmes soeurs</p>
           </header>
 
           <div class="row gy-4">
@@ -51,7 +65,7 @@
 
       </section><!-- End Team Section -->
     </main><!-- End #main -->
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center active"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" id="afficher4element" class="back-to-top d-flex align-items-center justify-content-center active"><i class="bi bi-balloon-heart-fill"></i></a>
 
 
       <script type="module">
@@ -91,29 +105,88 @@
         } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js"
 
      const db = getDatabase();
-     
+     const myOptionV = localStorage.getItem("myOptionV");
     //function to get all products in realTime
     function getAllDataRealtimePro() {
-      var myalldatas = [];
+      var myalldatas = []; 
       var tableauTotakeidd = []
       const dbref = ref(db, "utilisateurs/");
       onValue(dbref, (snopshot) => {
         snopshot.forEach((childsnopshot) => {
           myalldatas.push(childsnopshot.val());
         });
-        if (myalldatas.length != 0) {
-          return myalldatas.forEach((k) => {
-            //validation du compte par les admin
-            if(k.VALIDERMONCOMPTE == true ){
+        //function to select element
+        var index = 0;
+        var compteur = 0;
+        var liste = null; // ajouter cette variable pour stocker l'élément ul parent
+        var  monTableau = []
+       function fonctionEnfant(){
+          const Myalldatas = myalldatas.slice(index, index + 4); // sort(() => Math.random() - 0.5).slice(0, 4); Extraire 3 éléments à partir de l'index actuel
+          index += 4; // Augmenter l'index de 3 pour la prochaine fois
+          if (Myalldatas.length === 0) {
+            document.getElementById('iconid').innerHTML = ` <i class="fas fa-exclamation-triangle"></i>`
+              document.getElementById('etatalert').innerText = "Désolé"
+              document.getElementById('smsalert').innerHTML = `Aucun profil ne correspond à vos préférences !`
+              document.getElementById('activemyIdt').style.display = "block"
+              setTimeout(()=>{
+                document.getElementById('activemyIdt').style.display = "none"
+              },5000)
+              return;
+          }
+          for (const element of Myalldatas) {
+            //console.log(element)
+            monTableau.push(element)
+          }
+          // Supprimer la liste précédente si le compteur est supérieur à 1
+        if (compteur > 0) {
+          monTableau.splice(0, 4);
+         
+        }
+        console.log(monTableau)
+        compteur++; // augmenter le compteur de clics
+
+        if (monTableau.length != 0) {
+          return monTableau.forEach((k) => {
+            //validation du compte par les admin 
+            if(k.VALIDERMONCOMPTE == true &&  k.IDREGION == myOptionV){
             var divq = document.getElementById('idtheAllProForsite');
             let trow = document.createElement("div");
+            if(k.COMPTECREDIT == 0){  
+              document.getElementById('iconid').innerHTML = ` <i class="fas fa-exclamation-triangle"></i>`
+              document.getElementById('etatalert').innerText = "Désolé"
+              document.getElementById('smsalert').innerHTML = `vous ne disposez pas d'unité !`
+              document.getElementById('activemyIdt').style.display = "block"
+              setTimeout(()=>{
+                document.getElementById('activemyIdt').style.display = "none"
+                
+              },5000)
+            }  
             var monElement = 
             trow.addEventListener('mouseover', function() {
+             if(k.COMPTECREDIT == 0){
+              document.getElementById('mycontactidw').classList.add("ma-classeid");
+              document.getElementById('mycontactide').classList.add("ma-classeid");
+              document.getElementById('mycontactidt').classList.add("ma-classeid");
+              document.getElementById('mycontactide').classList.add("ma-classeid");
+              var mycontactidv =  document.getElementById('mycontactidv');
+              mycontactidv.addEventListener('click',  function(){
+                document.getElementById('activemyIdt').style.display = "block"
+                setTimeout(()=>{
+                document.getElementById('activemyIdt').style.display = "none"
+              },5000)
+              })
+             
+              
+             }else{
+              var mycontactidv =  document.getElementById('mycontactidv');
+              mycontactidv.addEventListener('click', updatecompte)
               var monElementy = k.Idproduct
               tableauTotakeidd.push(monElementy)
               const last = tableauTotakeidd.slice(-1).pop();
               localStorage.setItem("storageNamey", last);
+             }
           });
+         
           
             //trow.setAttribute("style", " margin: 20px;display: flex; align-items: center;flex-direction: column;justify-content: space-between;flex-wrap: wrap;");
             //function to transforme the photo to base64
@@ -127,22 +200,24 @@
                   <img src="${photoDataUrl}" class="img-fluid"
                     alt=""style="height: 42vh; width: 50vh;">
                   <div class="social">
-                    <a href="https://wa.me/${k.TELEPHONE}?text=Salut,%20comment%20vas-tu%20?.%20Moi%20c'est%20${k.fullname},%20${k.MONTRAVAILLEOUOCCUPATION}.%20Je%20suis%20vraiment%20intéressé%20pas%20ton%20profil%20que%20j'ai%20vu%20sur%20le%20site%20de%20rencontre%20illicolove."><i class="bi bi-whatsapp"></i></a>
-                    <a href="mailto:${k.email}"><i class="bi bi-envelope"></i></a>
-                    <a href="tel:${k.TELEPHONE}"><i class="bi bi-telephone"></i></a>
-                    <a href=""><i class="bi bi-eye"></i></a>
+                    <a id="mycontactidw" href="https://wa.me/${k.TELEPHONE}?text=Salut,%20comment%20vas-tu%20?.%20Moi%20c'est%20${k.fullname},%20${k.MONTRAVAILLEOUOCCUPATION}.%20Je%20suis%20vraiment%20intéressé%20pas%20ton%20profil%20que%20j'ai%20vu%20sur%20le%20site%20de%20rencontre%20illicolove."><i class="bi bi-whatsapp"></i></a>
+                    <a id="mycontactide" href="mailto:${k.email}"><i class="bi bi-envelope"></i></a>
+                    <a id="mycontactidt" href="tel:${k.TELEPHONE}"><i class="bi bi-telephone"></i></a>
+                    <a id="mycontactidv" style="cursor:pointer" ><i class="bi bi-eye"></i></a>
                   </div>
                 </div>
                 <div class="member-info">
                   <h4>${k.username}</h4>
                   <span>${k.fullname}</span>
                   <p style="width: 35vh !important; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${k.PHYSIQUEDEPROFILQUEJECHERCHE}</p>
+
                 </div>
               </div>
             </div>
  
                                 
             `
+
             divq.append(trow)
             }else{
 
@@ -153,9 +228,44 @@
           CreateAllproductnodata.innerHTML = `<div style = "display: flex; justify-content: center; margin: auto;"><img src="assets/img/no_data.svg" alt="" style = "width: 100%; height: 20vh;"> </div><br><p style="text-align: center;">Pas de produits disponible pour l'instant.</p>`
 
         }
+        }
+        fonctionEnfant()
+        var callFonction = document.getElementById("afficher4element")
+        callFonction.addEventListener('click', fonctionEnfant)
       });
     }
+    
+    // function to update compte  
+    const UserConnectuser = localStorage.getItem("unserconnect");
+    function updatecompte(){
+      const dbref = ref(db);
+        get(child(dbref, "utilisateurs/" + UserConnectuser))
+            .then((snapshot) => {
+            if (snapshot.exists()) {
+              var myCompta = snapshot.val().COMPTECREDIT
+              var debit = 1
+              var moncomptvalide = myCompta - debit
+              
+              update(ref(db, "utilisateurs/" + UserConnectuser), {
+                COMPTECREDIT:moncomptvalide
+                }).then(() => {
+                        //window.location.reload();
+                       // alert("les données sont misent à jour");
+                       location.reload();
+                    })
+                    .catch((error) => {
+                        alert("les données ne sont pas mise à jour " + error);
+                    });
+                
+            } else {
+                alert("no data");
+            }
+            })
+            .catch((error) => {
+            alert("il y a une ERROR " + error);
+            });
 
+    }
     window.onload = getAllDataRealtimePro;
     </script>
         <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
@@ -168,8 +278,23 @@
     <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="./../alert/alert.js"></script>
 
-    <!-- Template Main JS File -->
+
+    <!-- Template Main JS File 
+     update(ref(db, "utilisateurs/" + UserConnectuser), {
+                 
+            })
+
+                .then(() => {
+                    //window.location.reload();
+                    alert("les données sont misent à jour");
+                })
+                .catch((error) => {
+                    alert("les données ne sont pas mise à jour " + error);
+                });
+    
+    -->
     <script src="assets/js/main.js"></script>
 
   </body>

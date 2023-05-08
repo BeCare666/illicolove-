@@ -9,8 +9,27 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
     <script
         src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="login.css">
   </head>
   <body>
+    <div id="activemyIdt" style="display: none;">
+      <div class="toast activemyId toasta">
+        <div class="toast-content">
+          <p id="iconid"></p>
+          <div class="message">
+            <span class="text text-1" id="etatalert"></span>
+            <span class="text text-2" id="smsalert"></span>
+          </div>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
+        <!-- Remove 'activemyId' class, this is just to show in Codepen thumbnail 
+              <i class="fas fa-check check"></i>
+      -->
+        <div class="progress activemyId"></div>
+      </div>
+    </div>
     <form action="javascript:submitmy()">
       <h1 style="color: blue !important; text-align: center;">Sign Up for
         Account</h1>
@@ -18,32 +37,32 @@
       <!---required autofocus-->
       <label for="input-1">
         <span class="label-text">Full Name</span>
-        <span class="nav-dot"></span>
+        <span class="nav-dot"> <i class="fas  fa-user" style="color: white;"></i></span>
         <div class="signup-button-trigger">Sign Up</div>
       </label>
       <input id="input-2" type="text" placeholder="john" required />
       <label for="input-2">
         <span class="label-text">Username</span>
-        <span class="nav-dot"></span>
+        <span class="nav-dot"> <i class="fas  fa-user" style="color: white;"></i></span>
       </label>
       <input id="input-3" type="email" placeholder="email@address.com" required
         />
       <label for="input-3">
         <span class="label-text">Email</span>
-        <span class="nav-dot"></span>
+        <span class="nav-dot"> <i class="fas  fa-envelope" style="color: white;"></i></span>
       </label>
       <input id="input-4" type="text"
         placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required />
       <label for="input-4">
         <span class="label-text">Password</span>
-        <span class="nav-dot"></span>
+        <span class="nav-dot"> <i class="fas  fa-lock" style="color: white;"></i></span>
       </label>
      
       <input id="input-5" type="text"
         placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required />
       <label for="input-5">
         <span class="label-text">Confirm Password</span>
-        <span class="nav-dot"></span>
+        <span class="nav-dot"> <i class="fas  fa-lock" style="color: white;"></i></span>
       </label>
       <button type="submit">Create Your Account</button>
       <p class="tip">Press Tab</p>
@@ -137,8 +156,17 @@
             VILLEDHABITATIONDEPROFILQUEJECHERCHE:"",
             TRAVAILDEDEPROFILQUEJECHERCHE:"",
             AUTRESPRECISIONSDEPROFILQUEJECHERCHE:"",
+            IDREGION : ""
 
         }).then(() => {
+          document.getElementById('iconid').innerHTML = `  <i class="fas fa-check check"></i>`
+          document.getElementById('etatalert').innerText = "succès"
+          document.getElementById('smsalert').innerHTML = `Vous êtes inscrit avec succès !`
+          document.getElementById('activemyIdt').style.display = "block"
+          setTimeout(()=>{
+          document.getElementById('activemyIdt').style.display = "none"
+          window.location.href = "login.html"
+          },5000)
             alert("Adresse mail envoyée à Firebase !");
             localStorage.setItem('unserconnect', userId)
             localStorage.setItem('unserconnectmail', email)

@@ -34,7 +34,7 @@
     <section id="services">
       <div class="container" data-aos="fade-up" >
         <div class="section-header" style="margin-bottom: 8vh;">
-          <h2><i class="bi bi-x-square" style="cursor: pointer;" onclick="reflechethepage()"></i> Choix du pays </h2>
+          <h2><i class="bi bi-x-square" style="cursor: pointer;" onclick="reflechethepage()"></i> Choix du pays</h2>
           <!-- <p>Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet veniam enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute nulla ipsum velit export irure minim illum fore</p>-->
         </div>
 
@@ -69,15 +69,15 @@
       </div>
     </section><!-- End Services Section -->
 <script>
-   var tablecountry = []
-    const Chosemyregionclass = document.getElementsByClassName('chosemyregionclass');
-     for (let i = 0; i < Chosemyregionclass.length; i++) {
+   var tablecountryV = []
+   const ChosemyregionclassV = document.getElementsByClassName('chosemyregionclass');
+     for (let i = 0; i < ChosemyregionclassV.length; i++) {
        // Utilisez myElements[i] pour accéder à l'élément à l'index i
-       Chosemyregionclass[i].addEventListener('click', function(){
-        tablecountry.push(Chosemyregionclass[i].id)
-        const IDREGIONS = tablecountry.slice(-1).pop();
-        localStorage.setItem('myOption', IDREGIONS);
-        top.location.href = "./formulaire/formulaire.html"
+       ChosemyregionclassV[i].addEventListener('click', function(){
+        tablecountryV.push(ChosemyregionclassV[i].id)
+        const IDREGIONSV = tablecountryV.slice(-1).pop();
+        localStorage.setItem('myOptionV', IDREGIONSV);
+        top.location.href = "./FlexStart/index.html"
        })
      }
 

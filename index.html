@@ -32,11 +32,14 @@
     // Code pour appareil mobile
     //document.body.style.fontSize = "16px"; // Modifier la taille de la police pour appareils mobiles
     document.getElementById('myiframe').style.height = "190vh"
+    document.getElementById('myiframeconsult').style.height = "190vh"
     } else {
         // Code pour ordinateur de bureau
         //document.body.style.fontSize = "18px"; // Modifier la taille de la police pour ordinateurs de bureau
         document.getElementById('myiframe').style.height = "90vh"
         document.getElementById('myiframe').style.marginTop = "10vh"
+        document.getElementById('myiframeconsult').style.height = "90vh"
+        document.getElementById('myiframeconsult').style.marginTop = "10vh"
     }
     }
   </script>
@@ -106,8 +109,8 @@
     <div class="hero-content" data-aos="fade-up">
       <h2>Making <span>your ideas</span><br>happen!</h2>
       <div>
-        <a href="#" class="btn-get-started scrollto annoncy" id="PUBLIEZUNEANNONCE">PUBLIEZ UNE ANNONCE</a>
-        <a href="#" class="btn-projects scrollto annoncy" id="CONSULTEZLESANNONCES">CONSULTEZ LES ANNONCES</a>
+        <a href="#" class="btn-get-started scrollto annoncy" id="PUBLIEZUNEANNONCE" onclick="PUBLIEZUNEANNONCE()">PUBLIEZ UNE ANNONCE</a>
+        <a href="#" class="btn-projects scrollto annoncy" id="CONSULTEZLESANNONCES" onclick="CONSULTEZLESANNONCES()">CONSULTEZ LES ANNONCES</a>
       </div>
     </div>
 
@@ -126,6 +129,11 @@
   <main id="main" style="display: none;" >
     <div class="responsive-iframe">
       <iframe src="choix.html" frameborder="0" scrolling="no" style="width: 100%; margin-top: 10px;" id="myiframe"></iframe>
+    </div>
+  </main><!-- End #main -->
+  <main id="mainconsultconsult" style="display: none;" >
+    <div class="responsive-iframe">
+      <iframe src="consulte.html" frameborder="0" scrolling="no" style="width: 100%; margin-top: 10px;" id="myiframeconsult"></iframe>
     </div>
   </main><!-- End #main -->
 
@@ -150,14 +158,20 @@
  <!-- <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> -->
 
   <script>
-    var Annoncy = document.querySelectorAll('.annoncy');
-    Annoncy.forEach((q)=>{
-      q.addEventListener('click', function(){
-         document.getElementById('myheaderid').style.display = "none"
+   function PUBLIEZUNEANNONCE(){
+         document.getElementById('myheaderid').style.display = "none" 
          document.getElementById('footer').style.display = "none"
          document.getElementById('main').style.display = "block"
-      })
-    })
+         document.getElementById('mainconsultconsult').style.display = "none"
+   }
+ 
+   function CONSULTEZLESANNONCES(){
+    document.getElementById('myheaderid').style.display = "none" 
+         document.getElementById('footer').style.display = "none"
+         document.getElementById('main').style.display = "none"
+         document.getElementById('mainconsultconsult').style.display = "block"
+   }
+  
   </script>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/aos/aos.js"></script>

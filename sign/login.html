@@ -1,34 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Document</title>
     <link rel="stylesheet" href="login.css">
-</head>
-<body>
- 
-    <form action="javascript:login()">
-        <h1 style="color: blue !important; text-align: center;">Login a Account</h1>
-        <input id="input-1" type="text" placeholder="username" required  />
-        <label for="input-1">
-          <span class="label-text">Full Name</span>
-          <span class="nav-dot"></span>
-          <div class="signup-button-trigger">Log In</div>
-        </label>
+  </head>
+  <body>
+    <div id="activemyIdt" style="display: none;">
+      <div class="toast activemyId toasta">
+        <div class="toast-content">
+          <p id="iconid"></p>
+          <div class="message">
+            <span class="text text-1" id="etatalert"></span>
+            <span class="text text-2" id="smsalert"></span>
+          </div>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
+        <!-- Remove 'activemyId' class, this is just to show in Codepen thumbnail 
+              <i class="fas fa-check check"></i>
+      -->
+        <div class="progress activemyId"></div>
+      </div>
+    </div>
 
-        <input id="input-5" type="text" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required />
-        <label for="input-5">
-          <span class="label-text"> Password</span>
-          <span class="nav-dot"></span>
-        </label>
-        
-        <button type="submit">Create Your Account</button>
-        <p class="tip">Press Tab</p>
-        <div class="signup-button">Log In</div>
-      </form>
-      <script type="module">
+    <form action="javascript:login()">
+      <h1 style="color: blue !important; text-align: center;">Login a Account</h1>
+      <input id="input-1" type="text" placeholder="username" required />
+      <label for="input-1">
+        <span class="label-text">Full Name</span>
+        <span class="nav-dot"> <i class="fas fa-user fa-user" style="color: white;"></i></span>
+        <div class="signup-button-trigger">Log In</div>
+      </label>
+
+      <input id="input-5" type="text"
+        placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required />
+      <label for="input-5">
+        <span class="label-text"> Password</span>
+        <span class="nav-dot"> <i class="fas fa-lock" style="color: white;"></i></span>
+      </label>
+
+      <button type="submit">Create Your Account</button>
+      <p class="tip">Press Tab</p>
+      <div class="signup-button">Log In</div>
+    </form>
+    <script type="module">
 
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
@@ -76,12 +95,38 @@
                 .then((snapshot) => {
                     if (snapshot.exists()) {
                        if(username == snapshot.val().username && password == snapshot.val().password){
-                        window.location.href = "./../index.html"
+                        document.getElementById('input-1').value = ""
+                        document.getElementById('input-5').value = ""
+                        document.getElementById('iconid').innerHTML = `  <i class="fas fa-check check"></i>`
+                        document.getElementById('etatalert').innerText = "succès"
+                        document.getElementById('smsalert').innerHTML = `Vous êtes connecté avec succès !`
+                        document.getElementById('activemyIdt').style.display = "block"
+                        setTimeout(()=>{
+                          document.getElementById('activemyIdt').style.display = "none"
+                          //window.location.href = "./../index.html"
+                        },5000)
+                      
                        }else{
-                        alert("Mot de passe ou Email incorrect" + "" + username)
+                        document.getElementById('input-1').value = ""
+                        document.getElementById('input-5').value = ""
+                        document.getElementById('iconid').innerHTML = ` <i class="fas fa-exclamation-triangle"></i>`
+                        document.getElementById('etatalert').innerText = "Désolé"
+                        document.getElementById('smsalert').innerHTML = `Mot de passe ou Email incorrect !`
+                        document.getElementById('activemyIdt').style.display = "block"
+                        setTimeout(()=>{
+                          document.getElementById('activemyIdt').style.display = "none"
+                        },5000)
                        }
                     } else {
-                      alert("Vous n'avez pas un compte")
+                      document.getElementById('input-1').value = ""
+                        document.getElementById('input-5').value = ""
+                        document.getElementById('iconid').innerHTML = ` <i class="fas fa-exclamation-triangle"></i>`
+                        document.getElementById('etatalert').innerText = "Désolé"
+                        document.getElementById('smsalert').innerHTML = `Vous n'avez pas un compte !`
+                        document.getElementById('activemyIdt').style.display = "block"
+                        setTimeout(()=>{
+                          document.getElementById('activemyIdt').style.display = "none"
+                        },5000)
                     }
                 })
                 .catch((error) => {
@@ -92,6 +137,6 @@
         window.login = login;
     </script>
     <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script> 
-</body>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+  </body>
 </html>
