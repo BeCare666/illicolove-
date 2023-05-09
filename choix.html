@@ -23,6 +23,11 @@
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="./sign/logina.css">
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -30,6 +35,22 @@
 
 <body>
   <main >
+    <div id="activemyIdt" style="display: none;">
+      <div class="toast activemyId toasta"> 
+          <div class="toast-content">
+            <p id="iconid"></p>
+              <div class="message">
+                <span class="text text-1" id="etatalert"></span>
+              <span class="text text-2" id="smsalert"></span>
+            </div>            
+        </div>
+      <i class="fa-solid fa-xmark close"></i>
+      <!-- Remove 'activemyId' class, this is just to show in Codepen thumbnail 
+              <i class="fas fa-check check"></i>
+      -->
+      <div class="progress activemyId"></div>
+    </div>   
+  </div>  
     <!-- ======= Services Section ======= -->
     <section id="services">
       <div class="container" data-aos="fade-up" >
@@ -39,17 +60,26 @@
         </div>
 
         <div class="row gy-4" id="chosepays">
-
           <div class="col-lg-4 col-md-4 chosemyregionclass" data-aos="fade-up" data-aos-delay="100" style="cursor: pointer !important;" id="AFRIQUE">
             <div class="box">
+              <span class="iconvaliderzone" id="div1"></span>
               <div class="icon"><i class="bi bi-globe-europe-africa"></i></div>
               <h4 class="title"><a >Afrique</a></h4>
               <!----<p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestia</p>-->
             </div>
           </div>
-
+          <style>
+            .iconvaliderzone{
+              position: fixed;
+              top: 13px;
+              right: 12px;
+              color: blue;
+              margin-right: 12px;
+            }
+          </style>
           <div class="col-lg-4 col-md-4 chosemyregionclass" data-aos="fade-up" data-aos-delay="200" style="cursor: pointer !important;" id="EUROPE">
             <div class="box">
+              <span class="iconvaliderzone" id="div2"></span>
               <div class="icon"><i class="bi bi-globe-central-south-asia"></i></div>
               <h4 class="title"><a href="">Europe</a></h4>
                <!---- <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestia</p>-->
@@ -58,6 +88,7 @@
 
           <div class="col-lg-4 col-md-4 chosemyregionclass" data-aos="fade-up" data-aos-delay="300" style="cursor: pointer !important;" id="AUTRESPAYSDUMONDE">
             <div class="box">
+              <span class="iconvaliderzone" id="div3"></span>
               <div class="icon"><i class="bi bi-globe2"></i></div>
               <h4 class="title"><a href="">Autres pays du monde</a></h4>
                 <!--<p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestia</p>-->
@@ -68,18 +99,114 @@
 
       </div>
     </section><!-- End Services Section -->
-<script>
-   var tablecountry = []
-    const Chosemyregionclass = document.getElementsByClassName('chosemyregionclass');
-     for (let i = 0; i < Chosemyregionclass.length; i++) {
-       // Utilisez myElements[i] pour accéder à l'élément à l'index i
-       Chosemyregionclass[i].addEventListener('click', function(){
-        tablecountry.push(Chosemyregionclass[i].id)
-        const IDREGIONS = tablecountry.slice(-1).pop();
-        localStorage.setItem('myOption', IDREGIONS);
-        top.location.href = "./formulaire/formulaire.html"
-       })
-     }
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+          const firebaseConfig = {
+          apiKey: "AIzaSyBoOxLmlH9WR7si2Y0R01OM3c5I1wgnuPM",
+          authDomain: "illicolove-7c904.firebaseapp.com",
+          databaseURL: "https://illicolove-7c904-default-rtdb.firebaseio.com",
+          projectId: "illicolove-7c904",
+          storageBucket: "illicolove-7c904.appspot.com",
+          messagingSenderId: "1086957054874",
+          appId: "1:1086957054874:web:4f1899c85184210e482823"
+    };
+            // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        import {
+            getDatabase,
+            ref,
+            set,
+            update,
+            child,
+            onValue,
+            remove,
+            get,
+        } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+
+        import { getStorage, getDownloadURL 
+        } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js"
+
+        const db = getDatabase();
+        function getdata() {
+        const UserConnectuser = localStorage.getItem("unserconnect");
+        var tablecountry = []
+        const dbref = ref(db);
+        get(child(dbref, "utilisateurs/" + UserConnectuser))
+            .then((snapshot) => {
+            if (snapshot.exists()) {
+              if(snapshot.val().IDREGION){
+              setTimeout(()=>{
+                let phrase = snapshot.val().IDREGION;
+              let nouvellePhrase = phrase.substr(0, 6) + " " + phrase.substr(6, 4) + " " + phrase.substr(10);
+              nouvellePhrase = nouvellePhrase.replace("DUMONDE", "DU MONDE");
+              document.getElementById('iconid').innerHTML = `  <i class="fas fa-check check"></i>`
+              document.getElementById('etatalert').innerText = "info"
+              document.getElementById('smsalert').innerHTML = `Vous déjà une publication dans ${nouvellePhrase} !`
+              document.getElementById('activemyIdt').style.display = "block"
+              setTimeout(()=>{
+              document.getElementById('activemyIdt').style.display = "none"
+              },10000)
+              },3000)
+              // Vérifier si la valeur correspond à l'un des div
+              const div1 = document.getElementById('div1');
+              const div2 = document.getElementById('div2');
+              const div3 = document.getElementById('div3');
+              const AFRIQUE1 = document.getElementById('AFRIQUE');
+              const EUROP2 = document.getElementById('EUROPE');
+              const AUTRESPAYSDUMONDE3 = document.getElementById('AUTRESPAYSDUMONDE');
+              var option1 = 'AFRIQUE'
+              var option2 = 'EUROPE'
+              var option3 = 'AUTRESPAYSDUMONDE'
+
+              if (snapshot.val().IDREGION === option1) {
+                div1.innerHTML = `<i class="bi bi-check-circle-fill"></i>`;
+                AFRIQUE1.addEventListener('click', function(){
+                  top.location.href = "./formulaire/formulaire.html"
+                })
+              } else if (snapshot.val().IDREGION === option2) {
+                // Créer un nouveau span dans le div2
+                div2.innerHTML = `<i class="bi bi-check-circle-fill"></i>`;
+                EUROP2.addEventListener('click', function(){
+                  top.location.href = "./formulaire/formulaire.html"
+                })
+              } else if (snapshot.val().IDREGION === option3) {
+                // Créer un nouveau span dans le div3
+                div3.innerHTML = `<i class="bi bi-check-circle-fill"></i>`;
+                AUTRESPAYSDUMONDE3.addEventListener('click', function(){
+                  top.location.href = "./formulaire/formulaire.html"
+                })
+              } else {
+              const Chosemyregionclass = document.getElementsByClassName('chosemyregionclass');
+              for (let i = 0; i < Chosemyregionclass.length; i++) {
+                // Utilisez myElements[i] pour accéder à l'élément à l'index i
+                Chosemyregionclass[i].addEventListener('click', function(){
+                 alert("ça va péter")
+                })
+              }
+              }
+              }else{
+              const Chosemyregionclass = document.getElementsByClassName('chosemyregionclass');
+              for (let i = 0; i < Chosemyregionclass.length; i++) {
+                // Utilisez myElements[i] pour accéder à l'élément à l'index i
+                Chosemyregionclass[i].addEventListener('click', function(){
+                  tablecountry.push(Chosemyregionclass[i].id)
+                  const IDREGIONS = tablecountry.slice(-1).pop();
+                  localStorage.setItem('myOption', IDREGIONS);
+                  top.location.href = "./formulaire/formulaire.html"
+                })
+              }
+              }
+            } else {
+              //  alert("no data");
+            }
+            })
+            .catch((error) => {
+            alert("il y a une ERROR " + error);
+        });
+    }
+
+      window.onload = getdata;
 
      function reflechethepage(){
       // Recharger la page entière en ignorant le cache

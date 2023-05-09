@@ -1,0 +1,252 @@
+   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap');
+
+   #body {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+       font-family: 'Roboto', sans-serif;
+       font-weight: 400;
+       font-size: 20px;
+       color: #333;
+       list-style-type: none;
+       text-decoration: none;
+   }
+
+   #body {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       min-height: 90vh;
+
+
+   }
+
+   .block {
+       position: relative;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       width: 180px;
+       height: 180px;
+       border-radius: 50%;
+   }
+
+   .box {
+       position: relative;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       flex-direction: column;
+       width: calc(100% - 50px);
+       height: calc(100% - 50px);
+       border-radius: 50%;
+       background-color: #292929;
+       box-shadow: 0 0 5px 3px #222121;
+   }
+
+   .box::before {
+       position: absolute;
+       content: '';
+       width: calc(100% + 28px);
+       height: calc(100% + 28px);
+       border-radius: 50%;
+       border: 1px solid #353535;
+   }
+
+   .box .number span {
+       color: #4070f4;
+   }
+
+   .box .number .num {
+       font-size: 35px;
+       font-weight: bold;
+   }
+
+   .box .number .sub {
+       font-size: 20px;
+   }
+
+   .box .title {
+       font-size: 15px;
+       color: white;
+   }
+
+   .dots {
+       display: block;
+       position: absolute;
+       z-index: 2;
+       width: 100%;
+       height: 100%;
+       border-radius: 50%;
+       transition: 2s transform, 2s opacity ease;
+   }
+
+   .dots::after {
+       position: absolute;
+       content: '';
+       width: 10px;
+       height: 10px;
+       top: 5px;
+       left: 50%;
+       border-radius: 50%;
+       background-color: #4070f4;
+       box-shadow: 0 0 5px 2px #4070f4;
+       transform: translateX(-50%);
+   }
+
+   .svg {
+       position: absolute;
+       width: 100%;
+       height: 100%;
+       fill: none;
+       transform: rotate(-90deg);
+   }
+
+   .circle {
+       stroke: url(#gradientStyle);
+       stroke-width: 4px;
+       stroke-dasharray: 503;
+       stroke-dashoffset: 503;
+       animation-duration: 2s;
+       animation-timing-function: linear;
+       animation-fill-mode: forwards;
+       transition: 2s stroke-dashoffset;
+   }
+
+
+
+   #activemyIdt .toast {
+       position: absolute;
+       top: 25px;
+       right: 30px;
+       width: 45vh;
+       border-radius: 12px;
+       background: #fff;
+       padding: 20px 35px 20px 25px;
+       box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.1);
+       overflow: hidden;
+       transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+       animation: shake 0.7s cubic-bezier(.36, .07, .19, .97) forwards, disappear 0.3s linear 4.5s forwards;
+       display: block !important;
+   }
+
+   #activemyIdt .toast.activemyId {
+       transform: translateX(0%);
+   }
+
+   #activemyIdt .toast .toast-content {
+       display: flex;
+       align-items: center;
+   }
+
+   #activemyIdt .toast-content .message {
+       display: flex;
+       flex-direction: column;
+       margin: 0 20px;
+   }
+
+   #activemyIdt .message .text {
+       font-size: 16px;
+       font-weight: 200;
+       color: #666666;
+   }
+
+   #activemyIdt .message .text.text-1 {
+       font-weight: 600;
+       color: #333;
+   }
+
+   #activemyIdt .toast .close {
+       position: absolute;
+       top: 10px;
+       right: 15px;
+       padding: 5px;
+       cursor: pointer;
+       opacity: 0.7;
+   }
+
+   #activemyIdt .toast .close:hover {
+       opacity: 1;
+   }
+
+   #activemyIdt .toast .progress {
+       position: absolute;
+       bottom: 0;
+       left: 0;
+       height: 3px;
+       width: 100%;
+
+   }
+
+
+
+   #activemyIdt .toast-content .check {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       height: 35px;
+       min-width: 35px;
+       background-color: #4070f4 !important;
+       color: #fff;
+       font-size: 20px;
+       border-radius: 50%;
+   }
+
+
+
+   #activemyIdt .toasta .progress:before {
+       content: "";
+       position: absolute;
+       bottom: 0;
+       right: 0;
+       height: 100%;
+       width: 100%;
+       background-color: #4070f4 !important;
+       ;
+   }
+
+
+
+
+   #activemyIdt .progress.activemyId:before {
+       animation: progress 5s linear forwards;
+   }
+
+   @keyframes progress {
+       100% {
+           right: 100%;
+       }
+   }
+
+
+   @keyframes shake {
+       0% {
+           transform: translate(0);
+       }
+
+       25% {
+           transform: translate(3px, 3px);
+       }
+
+       50% {
+           transform: translate(0);
+       }
+
+       75% {
+           transform: translate(-3px, -3px);
+       }
+
+       100% {
+           transform: translate(0);
+       }
+   }
+
+   @keyframes disappear {
+       0% {
+           opacity: 1;
+       }
+
+       100% {
+           opacity: 0;
+       }
+   }

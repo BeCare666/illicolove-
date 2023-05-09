@@ -336,7 +336,7 @@
     
       }
     
- 
+  
     
       #activemyIdt .toast-content .check {
       display: flex;
@@ -360,7 +360,7 @@
       width: 100%;
       background-color: #c90c0c;
       }
-
+  
       #activemyIdt .toasta  .progress:before {
         content: "";
         position: absolute;

@@ -88,9 +88,10 @@
             </ul>
           </li>
 
-          <li class="dropdown"><a href="#"><span>Mon Profil </span> <i class="bi bi-person-fill" style="font-size: 4vh;"></i></a>
-            <ul>
-              <li><a href="#" class="reduceclasse"><i class="bi bi-person-fill"></i>User: sodinyessi</a></li>
+          <li class="dropdown"><a href="#"><span>Profil &nbsp; </span> <button class="btn btn-danger" style="border-radius: 100%; border: saddlebrown 2px;"><i class="bi bi-person-fill" style="margin-right: 5px;"></i></button></a>
+            <ul id="myprofilId">
+              <li><a href="#" class="reduceclasse" ><img src="assets/img/clients/client-1.png" alt="" style="height: 24vh; width: 24vh; border-radius: 100%; border: red solid 3px;"></a></li>
+              <li><a href="#" class="reduceclasse" ><i class="bi bi-person-fill"></i>User: sodinyessi</a></li>
               <li><a href="#" class="reduceclasse"><i class="bi bi-envelope-at-fill"></i>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;Email: developperfullstacksenou@gmail.com</a></li>
               <li><a href="#" class="reduceclasse"><i class="bi bi-credit-card-2-back-fill"></i> Crédit: 95 FCFA</a></li>
               <li><a href="#" class="reduceclasse"><i class="bi bi-box-arrow-left"></i> Se déconnecter</a></li>
@@ -99,7 +100,14 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-
+      <style>
+        #myprofilId{
+          position: absolute;
+          top: 9vh;
+          left: 0;
+         
+        }
+      </style>
     </div>
   </header><!-- End Header -->
 
@@ -109,7 +117,7 @@
     <div class="hero-content" data-aos="fade-up">
       <h2>Making <span>your ideas</span><br>happen!</h2>
       <div>
-        <a href="#" class="btn-get-started scrollto annoncy" id="PUBLIEZUNEANNONCE" onclick="PUBLIEZUNEANNONCE()">PUBLIEZ UNE ANNONCE</a>
+        <a href="#" class="btn-get-started scrollto annoncy" id="PUBLIEZUNEANNONCE" onclick="PUBLIEZUNEANNONCE()"></a>
         <a href="#" class="btn-projects scrollto annoncy" id="CONSULTEZLESANNONCES" onclick="CONSULTEZLESANNONCES()">CONSULTEZ LES ANNONCES</a>
       </div>
     </div>
@@ -173,6 +181,54 @@
    }
   
   </script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+    const firebaseConfig = {
+    apiKey: "AIzaSyBoOxLmlH9WR7si2Y0R01OM3c5I1wgnuPM",
+    authDomain: "illicolove-7c904.firebaseapp.com",
+    databaseURL: "https://illicolove-7c904-default-rtdb.firebaseio.com",
+    projectId: "illicolove-7c904",
+    storageBucket: "illicolove-7c904.appspot.com",
+    messagingSenderId: "1086957054874",
+    appId: "1:1086957054874:web:4f1899c85184210e482823"
+};
+      // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  import {
+      getDatabase,
+      ref,
+      set,
+      update,
+      child,
+      onValue,
+      remove,
+      get,
+  } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+
+  import { getStorage, getDownloadURL 
+  } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js"
+
+  const db = getDatabase();
+    const UserConnectuser = localStorage.getItem("unserconnect");
+  const dbref = ref(db);
+  get(child(dbref, "utilisateurs/" + UserConnectuser))
+      .then((snapshot) => {
+      if (snapshot.exists()) {
+         if(snapshot.val().IDREGION){
+          document.getElementById('PUBLIEZUNEANNONCE').innerHTML = `<i class="bi bi-pencil-square"></i> MODIFIER UNE ANNONCE`
+         }else{
+          document.getElementById('PUBLIEZUNEANNONCE').innerHTML = `<i class="bi bi-send"></i> PUBLIEZ UNE ANNONCE`
+         }
+      } else {
+          alert("no data");
+      }
+      })
+      .catch((error) => {
+      alert("il y a une ERROR " + error);
+  });
+
+
+</script>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -101,7 +101,7 @@
             removeItemButton: true,
             maxItemCount:5,
             searchResultLimit:5,
-            renderChoiceLimit:5
+            renderChoiceLimit:5,
           }); 
           var multipleCancelButton3 = new Choices('#choices-multiple-remove-buttonSonsexe', {
             removeItemButton: true,

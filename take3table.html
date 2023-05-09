@@ -5,44 +5,185 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-   <script>
-    const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    let index = 0;
-    let compteur = 0;
-    let liste = null; // ajouter cette variable pour stocker l'élément ul parent
+    <div id="activemyIdt">
+        <div class="toast  activemyId toasta">
+          <div class="toast-content">
+            <p id="iconid"></p>
+            <div class="message">
+              <span class="text text-1" id="etatalert">je suis ok</span>
+              <span class="text text-2" id="smsalert">moi aussi</span>
+            </div>
+          </div>
+          <i class="fa-solid fa-xmark close"></i>
+          <!-- Remove 'activemyId' class, this is just to show in Codepen thumbnail 
+                <i class="fas fa-check check"></i>
+        -->
+          <div class="progress activemyId"></div>
+        </div>
+      </div>
+      <style>
+        #activemyIdt  .toast {
+        position: absolute;
+        top: 25px;
+        right: 30px;
+        width: 65vh;
+        border-radius: 12px;
+        background: #fff;
+        padding: 20px 35px 20px 25px;
+        box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+        animation: shake 0.7s cubic-bezier(.36,.07,.19,.97) forwards, disappear 0.3s linear 4.5s forwards;
+        display: block !important;
+        }
+      
+        #activemyIdt .toast.activemyId {
+        transform: translateX(0%);
+        }
+      
+        #activemyIdt .toast .toast-content {
+        display: flex;
+        align-items: center;
+        }
+      
+        #activemyIdt .toast-content .message {
+        display: flex;
+        flex-direction: column;
+        margin: 0 20px;
+        }
+      
+        #activemyIdt .message .text {
+        font-size: 16px;
+        font-weight: 400;
+        color: #666666;
+        }
+      
+        #activemyIdt .message .text.text-1 {
+        font-weight: 600;
+        color: #333;
+        }
+      
+        #activemyIdt  .toast .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        padding: 5px;
+        cursor: pointer;
+        opacity: 0.7;
+        }
+      
+        #activemyIdt .toast .close:hover {
+        opacity: 1;
+        }
+      
+        #activemyIdt  .toast .progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        width: 100%;
+      
+        }
+      
+   
+      
+        #activemyIdt .toast-content .check {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 35px;
+        min-width: 35px;
+        background-color: #4070f4 !important;
+        color: #fff;
+        font-size: 20px;
+        border-radius: 50%;
+        }
+      
+      
+        #activemyIdt .toast  .progress:before {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #c90c0c;
+        }
+  
+        #activemyIdt .toast-content .check {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 35px;
+        min-width: 35px;
+        background-color: #c90c0c;
+        color: #fff;
+        font-size: 20px;
+        border-radius: 50%;
+        }
+        
+        #activemyIdt .toast-content .fa-exclamation-triangle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 35px;
+          min-width: 35px;
+          background-color: #c90c0c;
+          color: #fff;
+          font-size: 20px;
+          border-radius: 50%;
+          }
+      
+        #activemyIdt .progress.activemyId:before {
+        animation: progress 5s linear forwards;
+        }
+      
+        @keyframes progress {
+        100% {
+            right: 100%;
+        }
+        }
+      
+      
+            @keyframes shake {
+            0% {
+                transform: translate(0);
+            }
+            25% {
+                transform: translate(3px, 3px);
+            }
+            50% {
+                transform: translate(0);
+            }
+            75% {
+                transform: translate(-3px, -3px);
+            }
+            100% {
+                transform: translate(0);
+            }
+            }
+      
+            @keyframes disappear {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+            }
 
-    function afficherElements() {
-    const elements = array.slice(index, index + 4);  // Extraire 3 éléments à partir de l'index actuel
-    index += 4; // Augmenter l'index de 3 pour la prochaine fois
-    
-    if (elements.length === 0) {
-        console.log('Fin du tableau');
-        return;
-    }
-    
-    // Supprimer la liste précédente si le compteur est supérieur à 1
-    if (compteur > 0) {
-        document.body.removeChild(liste);
-    }
-    
-    const nouveauTableau = document.createElement('ul');
-    for (const element of elements) {
-        const nouvelElement = document.createElement('li');
-        nouvelElement.innerText = element;
-        nouveauTableau.appendChild(nouvelElement);
-    }
-    
-    document.body.appendChild(nouveauTableau);
-    liste = nouveauTableau; // stocker l'élément ul parent
-    compteur++; // augmenter le compteur de clics
-    }
-
-    const bouton = document.createElement('button');
-    bouton.innerText = 'Afficher les éléments';
-    bouton.addEventListener('click', afficherElements);
-    document.body.appendChild(bouton);
-   </script> 
+            .responsive-iframe {
+                position: relative;
+              }
+              .responsive-iframe iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+               
+              }
+      </style>
 </body>
 </html>

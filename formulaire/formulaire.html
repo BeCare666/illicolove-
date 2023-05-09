@@ -24,11 +24,11 @@
         <script
             src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
         <link rel="stylesheet" href="formulaire.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     </head>
-    <body>
-
+    <body id="mybodyID">
         <!-- MultiStep Form -->
-        <div class="container">
+        <div class="container" id="myFormulaireId" >
             <!--  <img src="" alt="" id="photo">-->
             <div class="row">
                 <div class="col-md-6 col-lg-12"><!---col-md-offset-3-->
@@ -53,20 +53,20 @@
                             <p style="text-align: start !important;">Nom et
                                 Prénoms <i class="fa fa-star required"></i></p>
                             <input type="text" id="myprofileidPrénoms"
-                                name="lname" placeholder="Nom et Prénoms"/>
+                                name="lname" placeholder="Nom et Prénoms" required/>
                             <p style="text-align: start !important;">Ma
                                 nationèèalité <i class="fa fa-star required"></i></p>
                             <input type="text" id="myprofileidnationèèalité"
-                                name="lname" placeholder="Ma nationalité"/>
+                                name="lname" placeholder="Ma nationalité" required/>
                             <p style="text-align: start !important;">Mon travail
                                 ou occupation <i class="fa fa-star required"></i></p>
                             <input type="text" id="myprofileidtravail"
-                                name="text" placeholder="Mon travail"/>
+                                name="text" placeholder="Mon travail" required/>
                             <p style="text-align: start !important;">Ma
                                 situation matrimoniale <i class="fa fa-star
                                     required"></i></p>
                             <select id="choices-multiple-remove-button"
-                                placeholder="Select upto 5 tags">
+                                >
                                 <option value="" selected></option>
                                 <option value="Célibataire">Célibataire</option>
                                 <option value="Célibataire sans enfant(s)">Célibataire
@@ -95,17 +95,17 @@
                             <p style="text-align: start !important;">Mon poids
                                 <i class="fa fa-star required"></i></p>
                             <input type="number" id="myprofileidpoids"
-                                name="gplus" placeholder="Mon poids" min="10"
-                                max="200" step="10"/>
+                                name="gplus" placeholder="Mon poids" min="1"
+                                max="200" step="1" required/>
                             <p style="text-align: start !important;">Mon teint
                                 <i class="fa fa-star required"></i></p>
                             <input type="text" id="myprofileidteint"
-                                name="gplus" placeholder="Mon teint"/>
+                                name="gplus" placeholder="Mon teint" required/>
                             <p style="text-align: start !important;">Mon sexe <i
                                     class="fa fa-star required"></i></p>
                             <select id="choices-multiple-remove-buttonsexe"
-                                placeholder="Select upto 5 tags">
-                                <option value="" selected></option>
+                                >
+                                <option value="" ></option>
                                 <option value="Masculin">Masculin</option>
                                 <option value="Féminin">Féminin</option>
                             </select>
@@ -126,8 +126,8 @@
                             <p style="text-align: start !important;">Je veux une
                                 rencontre <i class="fa fa-star required"></i></p>
                             <select id="choices-multiple-remove-buttonrencontre"
-                                placeholder="Select upto 5 tags">
-                                <option value="" selected></option>
+                                >
+                                <option value="" ></option>
                                 <option value="Amicale, une compagnie pour
                                     briser la solitude">Amicale, une compagnie
                                     pour briser la solitude</option>
@@ -138,15 +138,15 @@
                             <p style="text-align: start !important;">Pièce
                                 d'identité <i class="fa fa-star required"></i></p>
                             <input type="file" id="myprofileididentité"
-                                name="gplus" placeholder="Pièce d'identité"/>
+                                name="gplus" placeholder="Pièce d'identité" required/>
                             <p style="text-align: start !important;">
                                 Photo 1 <i class="fa fa-star required"></i></p>
                             <input type="file" id="myprofileidPhotos"
-                                name="gplus" placeholder="Deux de vos Photos"/>
+                                name="gplus" placeholder="Deux de vos Photos" required/>
                             <p style="text-align: start !important;">
                                 Photo 2 <i class="fa fa-star required"></i></p>
                             <input type="file" id="myprofileidPhoto2"
-                                name="gplus" placeholder="Deux de vos Photos"/>
+                                name="gplus" placeholder="Deux de vos Photos" required/>
                             <input type="button" name="previous" class="previous
                                 action-button-previous" value="Previous"/>
                             <input type="button" name="next" class="next
@@ -159,8 +159,8 @@
                             <p style="text-align: start !important;">Son sexe <i
                                     class="fa fa-star required"></i></p>
                             <select id="choices-multiple-remove-buttonSonsexe"
-                                placeholder="Select upto 5 tags">
-                                <option value="" selected></option>
+                                >
+                                <option value="" ></option>
                                 <option value="Masculin">Masculin</option>
                                 <option value="Féminin">Féminin</option>
                             </select>
@@ -168,14 +168,14 @@
                                 d'âge <i class="fa fa-star required"></i></p>
                             <input type="number" id="myprofileidtrancheâge"
                                 name="facebook" placeholder="Sa tranche d'âge"
-                                min="10" max="200" step="10"/>
+                                min="10" max="200" step="1" required/>
                             <p style="text-align: start !important;">Sa
                                 situation matrimoniale <i class="fa fa-star
                                     required"></i></p>
                             <select
                                 id="choices-multiple-remove-buttonmatrimoniale"
-                                placeholder="Select upto 5 tags">
-                                <option value="" selected></option>
+                                >
+                                <option value="" ></option>
                                 <option value="Célibataire">Célibataire</option>
                                 <option value="Célibataire sans enfant(s)">Célibataire
                                     sans enfant(s)</option>
@@ -186,7 +186,7 @@
                             <p style="text-align: start !important;">Son pays de
                                 résidence <i class="fa fa-star required"></i></p>
                             <input type="text" id="myprofileidSonpays"
-                                name="gplus" placeholder="Son pays"/>
+                                name="gplus" placeholder="Son pays" required/>
                             <input type="button" name="previous" class="previous
                                 action-button-previous" value="Previous"/>
                             <input type="button" name="next" class="next
@@ -200,21 +200,21 @@
                                 préférences physiques <i class="fa fa-star
                                     required"></i></p>
                             <textarea type="text" id="myprofileidpréférences"
-                                name="email" placeholder="Vos préférences"></textarea>
+                                name="email" placeholder="Vos préférences" required></textarea>
                             <p style="text-align: start !important;">Sa ville
                                 d'habitation <i class="fa fa-star required"></i></p>
                             <input type="text" id="myprofileidSaville"
                                 name="pass" placeholder="Sa ville
-                                d'habitation"/>
+                                d'habitation" required/>
                             <p style="text-align: start !important;">Son travail
                                 ou occupations <i class="fa fa-star required"></i></p>
                             <input type="text" id="myprofileidoccupations"
                                 name="pass" placeholder="Son travail
-                                occupations"/>
+                                occupations" required/>
                             <p style="text-align: start !important;">Autres
                                 précisions <i class="fa fa-star required"></i></p>
                             <textarea type="text" id="myprofileidprécisions"
-                                name="email" placeholder="Autres précisions"></textarea>
+                                name="email" placeholder="Autres précisions" required></textarea>
                             <input type="button" name="previous" class="previous
                                 action-button-previous" value="Previous"/>
                             <input type="submit" name="submit" class="submit
@@ -230,6 +230,16 @@
                 </div>
             </div>
         </div>
+        <main  id="controleStep" style="display: none;">
+        <div class="responsive-iframe">
+              <iframe src="cercle.html" frameborder="0" scrolling="no" style="width: 100%; margin-top: 10px;" id="myiframe"></iframe>
+        </div>
+        </main>
+        <main  id="controleStepA" style="display: none;">
+            <div class="responsive-iframe">
+                  <iframe src="cerclesucess.html" frameborder="0" scrolling="no" style="width: 100%; margin-top: 10px;" id="myiframeA"></iframe>
+            </div>
+        </main>
         <script type="module">
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
         const firebaseConfig = {
@@ -288,7 +298,6 @@
         var base64Contentphoto2table = []
         const IDREGION = localStorage.getItem("myOption")
         function getdata() {
-        alert(IDREGION)
         const dbref = ref(db);
         get(child(dbref, "utilisateurs/" + UserConnectuser))
             .then((snapshot) => {
@@ -325,7 +334,10 @@
                  myprofileidprécisions.value =   snapshot.val().AUTRESPRECISIONSDEPROFILQUEJECHERCHE
                 
             } else {
-                alert("no data");
+                document.getElementById('iconid').innerHTML = ` <i class="fas fa-exclamation-triangle"></i>`
+                document.getElementById('etatalert').innerText = "Désolé"
+                document.getElementById('smsalert').innerHTML = `Pas de donnée !`
+                document.getElementById('activemyIdt').style.display = "block"
             }
             })
             .catch((error) => {
@@ -427,13 +439,23 @@
         // Commencez la lecture du fichier
         reader.readAsArrayBuffer(file);
     
-        }
-       
+        }   
         sunmitannonceid.addEventListener('click', function(){
+
             const PieceID = base64Contenttable.slice(-1).pop();
             const Photo1ID = base64Contentphoto1table.slice(-1).pop();
             const Photo2ID = base64Contentphoto2table.slice(-1).pop();
-            update(ref(db, "utilisateurs/" + UserConnectuser), {
+            if(myprofileidMaVille.value && myprofileidtéléphone.value &&
+               myprofileidPrénoms.value && choicesmultipleremovebuttonrencontre.value &&
+               myprofileidnationèèalité.value && PieceID && Photo1ID && Photo2ID &&
+               myprofileidtravail.value && IDREGION && choicesmultipleremovebuttonSonsexe.value &&
+               choicesmultipleremovebutton.value &&  myprofileidtrancheâge.value &&
+               myprofileidâge.value && choicesmultipleremovebuttonmatrimoniale.value &&
+               myprofileidtaille.value && myprofileidSonpays.value && myprofileidpréférences.value &&
+               myprofileidpoids.value && myprofileidSaville.value && myprofileidoccupations.value &&
+               myprofileidteint.value && choicesmultipleremovebuttonsexe.value && myprofileidprécisions.value
+            ){
+                update(ref(db, "utilisateurs/" + UserConnectuser), {
                 MAVILLEDERESIDENCE : myprofileidMaVille.value,
                 fullname : myprofileidPrénoms.value,
                 MANATIONNALITE :myprofileidnationèèalité.value,
@@ -462,11 +484,39 @@
             })
                 .then(() => {
                     //window.location.reload();
-                    alert("les données sont misent à jour");
+                document.getElementById('controleStep').style.display = "none"
+                document.getElementById('myFormulaireId').style.display = "none"
+                document.getElementById('controleStepA').style.display = " block"
+                document.getElementById('mybodyID').style.backgroundColor = "#222121"
+                setTimeout(()=>{
+                    window.location.replace("./../index.html");
+                //document.getElementById('controleStep').style.display = "none"
+                //document.getElementById('controleStepA').style.display = "none"
+                //document.getElementById('myFormulaireId').style.display = "block" 
+                //document.getElementById('mybodyID').style.backgroundColor = "white"
+               
+                }, 10000)
+                  
                 })
                 .catch((error) => {
-                    alert("les données ne sont pas mise à jour " + error);
+               
+                
                 });
+            }else{  
+                
+                document.getElementById('controleStep').style.display = "block"
+                document.getElementById('myFormulaireId').style.display = "none"
+                document.getElementById('controleStepA').style.display = "none"
+                document.getElementById('mybodyID').style.backgroundColor = "#222121"
+                setTimeout(()=>{
+                document.getElementById('controleStep').style.display = "none"
+                document.getElementById('controleStepA').style.display = "none"
+                document.getElementById('myFormulaireId').style.display = "block" 
+                document.getElementById('mybodyID').style.backgroundColor = "white"
+               
+                }, 10000)
+                  
+            }
         })
         </script>
         <script
